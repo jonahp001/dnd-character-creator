@@ -31,6 +31,18 @@
   border-radius: 1rem;
 }
 
+.pic-section {
+  display: flex;
+  flex-wrap: wrap;
+
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.pic-wrapper {
+  flex-basis: calc(100%/3);
+}
+
 .column-full,
 .column-half {
   width: 100%;
