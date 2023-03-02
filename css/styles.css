@@ -1,0 +1,122 @@
+body {
+  background-image: url("../images/hero1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #d94a37;
+  color: white;
+}
+
+h1 {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.gallery-link {
+  text-decoration: none;
+  background-color: white;
+  color: #d94a37;
+  font-size: 1.25rem;
+  font-family: Roboto, sans-serif;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.intro > h2 {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-top: 2rem;
+}
+
+.intro > p {
+  font-size: 1rem;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  margin: auto 2rem;
+  margin-bottom: 1.5rem;
+}
+
+#disclaimer {
+  font-size: 0.75rem;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  margin: auto 2rem;
+  margin-bottom: 5rem;
+}
+
+.start-area > p {
+  font-size: 1.15rem;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  margin: 0 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.button-link {
+  text-decoration: none;
+  background-color: #d94a37;
+  color: white;
+  font-size: 1.75rem;
+  font-family: Roboto, sans-serif;
+  padding: 0.6rem 1.75rem;
+  border-radius: 0.5rem;
+  margin: 1rem auto 3rem;
+}
+
+.intro-bottom {
+  flex-grow: 1;
+}
+
+.intro-bottom > h3 {
+  font-size: 1.5rem;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 600;
+  margin: auto 2rem;
+}
+
+.line {
+  border-top: 2px solid black;
+  margin: 0 2rem;
+}
+
+.intro-bottom > p {
+  color: #757575;
+  font-size: 0.85rem;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 850px) {
+  .intro {
+    padding-left: 4rem;
+  }
+
+  .intro > h2 {
+    text-align: left;
+    margin-left: 2rem;
+  }
+
+  .start-area {
+    padding-right: 4rem;
+    height: 28rem;
+  }
+
+  .button-link {
+    margin-bottom: 0;
+  }
+
+  .intro-bottom {
+    padding: 0 4rem;
+  }
+}

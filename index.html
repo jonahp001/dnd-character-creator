@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,50 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Titillium+Web:wght@400;600;700&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <header>
+    <div class="container">
+      <div class="column-full nav-row">
+        <h1>D&amp;D Character Creator</h1>
+        <a class="gallery-link" href="#gallery">Gallery</a>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="column-full main-body">
+      <div class="content-area">
+        <div class="row">
+          <div class="column-half intro">
+            <h2>Welcome!</h2>
+            <p>Welcome to the Dungeons and Dragons Character Creator!</p>
+            <p>You can create, save, and view user-generated, customized D&amp;D characters to use in your campaigns.
+            </p>
+            <p id="disclaimer">&ast;&ast;Please note that the character customization will be for basic information.</p>
+          </div>
+          <div class="column-half centered-row start-area">
+            <p>Please click the button below to begin!</p>
+            <a class="button-link" href="#start">START</a>
+          </div>
+        </div>
+        <div class="column-full intro-bottom">
+          <h3>Gallery</h3>
+          <div class="line"></div>
+          <p>The gallery is empty! Please create a new character</p>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
