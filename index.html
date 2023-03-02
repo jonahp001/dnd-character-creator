@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,71 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Titillium+Web:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
   <header>
+    <div class="container">
+      <div class="column-full nav-row">
+        <h1>D&amp;D Character Creator</h1>
+        <a class="gallery-link" href="#gallery">Gallery</a>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="column-full main-body">
+      <section id="home-page" class="">
+        <div class="content-area">
+          <div class="row">
+            <div class="column-half intro">
+              <h2>Welcome!</h2>
+              <p>Welcome to the Dungeons and Dragons Character Creator!</p>
+              <p>You can create, save, and view user-generated, customized D&amp;D characters to use in your campaigns.
+              </p>
+              <p id="disclaimer">&ast;&ast;Please note that the character customization will be for basic information.</p>
+            </div>
+            <div class="column-half centered-row start-area">
+              <p>Please click the button below to begin!</p>
+              <a class="start-button" href="#start">START</a>
+            </div>
+          </div>
+          <div class="column-full intro-bottom">
+            <h3>Gallery</h3>
+            <div class="line"></div>
+            <p>The gallery is empty! Please create a new character</p>
+          </div>
+        </div>
+      </section>
+      <!-- each section will be a new viewswap -->
+      <section id="character-creation-page" class="hidden">
+        <div class="content-area">
+          <div class="character-creation-intro">
+            <p>Every Dungeons &amp; Dragons character begins by determining 3 main characteristics: race, class, and ability score.</p>
+            <p>Please choose from the selections below to create your character!</p>
+          </div>
+          <form id="character-form" class="centered-row">
+            <!-- h2 subject to change -->
+            <h2>Select a Race:<i class="fa-solid fa-caret-left"></i></h2>
+            <h2>Select a Class:<i class="fa-solid fa-caret-left"></i></h2>
+            <h2>Ability Scores:<i class="fa-solid fa-caret-left"></i></h2>
+            <button id="submit-button" type="submit">SUBMIT</button>
+          </form>
+        </div>
+      </section>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
