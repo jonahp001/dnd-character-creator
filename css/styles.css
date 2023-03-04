@@ -185,8 +185,67 @@ img {
   margin-bottom: 0.5rem;
 }
 
-.pic-wrapper {
+.character-content-area img {
+  width: 7rem;
+  height: 7rem;
+}
+
+.pic-wrapper img:hover {
   cursor: pointer;
+}
+
+.character-content-area .fa-square-xmark {
+  position: relative;
+  color: #d94a37;
+  font-size: 2rem;
+  right: 12rem;
+}
+
+.character-content-area .fa-square-xmark:hover {
+  cursor: pointer;
+}
+
+.character-content-area h4 {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 600;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+/* .character-content-area h5 {
+  font-family: "Titillium Web", sans-serif;
+  text-align: left;
+  margin-bottom: 0.15rem;
+} */
+
+.race-characteristics h5 {
+  font-family: "Titillium Web", sans-serif;
+  text-align: left;
+  margin-bottom: 0.15rem;
+  margin-top: 0;
+}
+
+.race-characteristics p {
+  font-size: 0.75rem;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.fa-circle-check {
+  position: absolute;
+  font-size: 3.5rem;
+  color: #00f946;
+  bottom: 1.5rem;
+  left: 1.3rem;
+}
+
+.fa-circle-check:hover {
+  cursor: pointer;
+}
+
+.selected-race-modal {
+  filter: brightness(0.6);
 }
 
 @media screen and (min-width: 850px) {
@@ -215,5 +274,23 @@ img {
   .character-creation-intro > p {
     margin: auto 12rem;
     margin-bottom: 1rem;
+  }
+
+  #race {
+    padding: 0 12rem;
+  }
+
+  .pic-wrapper h4 {
+    font-size: 1.25rem;
+  }
+
+  .pic-wrapper img {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .fa-circle-check {
+    bottom: 2.5rem;
+    left: 2.3rem;
   }
 }
