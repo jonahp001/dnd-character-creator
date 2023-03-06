@@ -7,10 +7,14 @@ var $selectARace = document.querySelector('#select-a-race');
 var $raceCaret = document.querySelector('#race-caret');
 var $raceIcons = document.querySelector('#race-icons');
 
-var $dragonborn = document.querySelector('#Dragonborn');
-var $dragonbornModal = document.querySelector('#dragonborn-modal');
-// the following subject to change..
-var $xMark = document.querySelector('.fa-square-xmark');
+var $selectAClass = document.querySelector('#select-a-class');
+var $classCaret = document.querySelector('#class-caret');
+var $classIcons = document.querySelector('#class-icons');
+
+var $xMarks = document.querySelectorAll('#race .fa-square-xmark');
+var $xMarkRaceModals = document.querySelectorAll('.pic-wrapper .modal-bg');
+
+var $racePicWrapper = document.querySelectorAll('#race .pic-wrapper');
 
 // function ajaxRequest() {
 //   var xhr = new XMLHttpRequest();
@@ -50,27 +54,55 @@ $selectARace.addEventListener('click', function (event) {
   }
 });
 
-$dragonborn.addEventListener('dblclick', function (event) {
-  $dragonbornModal.setAttribute('class', 'modal-bg');
-  ajaxRequest($dragonborn);
+$selectAClass.addEventListener('click', function (event) {
+  if (event.target.getAttribute('class') === 'character-h2') {
+    $selectAClass.setAttribute('class', 'character-h2-expanded');
+    $classCaret.setAttribute('class', 'fa-solid fa-caret-down');
+    $classIcons.setAttribute('class', 'pic-section');
+  } else if (event.target.getAttribute('class') === 'character-h2-expanded') {
+    $selectAClass.setAttribute('class', 'character-h2');
+    $classCaret.setAttribute('class', 'fa-solid fa-caret-left');
+    $classIcons.setAttribute('class', 'pic-section hidden');
+  }
 });
 
-$xMark.addEventListener('click', function (event) {
-  $dragonbornModal.setAttribute('class', 'modal-bg hidden');
+// var $racePicWrapperArray = Array.from($racePicWrapper);
+// console.log($racePicWrapperArray);
+
+$racePicWrapper.forEach(race => {
+  race.addEventListener('dblclick', function (event) {
+    race.childNodes[5].setAttribute('class', 'modal-bg');
+    ajaxRequest(race);
+  });
 });
+
+// console.log($xMarks[0].parentElement.parentElement);
+
+for (var xMark of $xMarks) {
+  xMark.addEventListener('click', function (event) {
+    for (var i = 0; i < $xMarks.length; i++) {
+      if (event.target.parentElement.parentElement === $xMarkRaceModals[i]) {
+        $xMarkRaceModals[i].setAttribute('class', 'modal-bg hidden');
+      }
+    }
+  });
+}
+
+// $xMark.addEventListener('click', function (event) {
+//   $dragonbornModal.setAttribute('class', 'modal-bg hidden');
+// });
+
+// var $picWrapper = document.querySelectorAll('#race .pic-wrapper');
 
 var $picContainerImg = document.querySelectorAll('.pic-container img');
 var $picContainer = document.querySelectorAll('.pic-container');
 
-// $picContainerImg.addEventListener('click', function (event) {
-//   console.log(event.target);
-//   $picContainerImg.setAttribute('class', 'selected-race-modal');
-//   var $checkMark = document.createElement('i');
-//   $checkMark.setAttribute('class', 'fa-regular fa-circle-check');
-//   if (document.querySelector('.pic-container i') === null) {
-//     $picContainer.appendChild($checkMark);
-//   }
-// });
+// for (var picWrapper of $picWrapper) {
+//   picWrapper.addEventListener('dblclick', function (event) {
+//     picWrapper.setAttribute('class', 'modal-bg');
+//     ajaxRequest($dragonborn);
+//   });
+// }
 
 for (var picContainerImg of $picContainerImg) {
   picContainerImg.addEventListener('click', function (event) {
@@ -91,15 +123,26 @@ for (var picContainerImg of $picContainerImg) {
   });
 }
 
-var $raceCharacteristics = document.querySelector('.pic-wrapper .race-characteristics');
+var $raceCharacteristics = document.querySelectorAll('.pic-wrapper .race-characteristics');
+// var $raceH5 = document.querySelectorAll('.race-characteristics h5');
+// console.log($raceCharacteristics);
+// console.log($raceCharacteristics[4].id);
+// console.log($raceCharacteristics[4].childNodes.length);
+// console.log($raceCharacteristics[4].children.length);
+
+// console.log($dragonborn);
 
 function ajaxRequest(raceName) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.open5e.com/races/');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    // console.log(xhr.response.results);
+    // console.log(xhr.response.results[0].name);
+    // console.log($raceH5);
+    // console.log($raceH5[0]);
     for (var i = 0; i < xhr.response.results.length; i++) {
-      if (xhr.response.results[i].name === raceName.getAttribute('id') && document.querySelector('.race-characteristics h5') === null) {
+      if (xhr.response.results[i].name === raceName.getAttribute('id') && $raceCharacteristics[i].childNodes.length <= 1) {
         var $age = document.createElement('h5');
         $age.textContent = 'Age:';
         var $ageInfo = document.createElement('p');
@@ -120,22 +163,32 @@ function ajaxRequest(raceName) {
         $asi.textContent = 'Ability Score Increase:';
         var $asiInfo = document.createElement('p');
         $asiInfo.textContent = xhr.response.results[i].asi_desc;
-        var $traits = document.createElement('h5');
-        $traits.textContent = 'Traits:';
-        var $traitsInfo = document.createElement('p');
-        $traitsInfo.textContent = xhr.response.results[i].traits;
-        $raceCharacteristics.appendChild($age);
-        $raceCharacteristics.appendChild($ageInfo);
-        $raceCharacteristics.appendChild($size);
-        $raceCharacteristics.appendChild($sizeInfo);
-        $raceCharacteristics.appendChild($languages);
-        $raceCharacteristics.appendChild($languagesInfo);
-        $raceCharacteristics.appendChild($alignment);
-        $raceCharacteristics.appendChild($alignmentInfo);
-        $raceCharacteristics.appendChild($asi);
-        $raceCharacteristics.appendChild($asiInfo);
-        // $raceCharacteristics.appendChild($traits);
-        // $raceCharacteristics.appendChild($traitsInfo);
+        var $newDiv1 = document.createElement('div');
+        var $newDiv2 = document.createElement('div');
+        // var $traits = document.createElement('h5');
+        // $traits.textContent = 'Traits:';
+        // var $traitsInfo = document.createElement('p');
+        // $traitsInfo.textContent = xhr.response.results[i].traits;
+        for (var j = 0; j < $raceCharacteristics.length; j++) {
+          // console.log($raceCharacteristics[0].id);
+          // console.log(xhr.response.results[0].slug);
+          if (xhr.response.results[i].slug === $raceCharacteristics[j].id) {
+            $raceCharacteristics[j].appendChild($newDiv1);
+            $raceCharacteristics[j].appendChild($newDiv2);
+            $newDiv1.appendChild($age);
+            $newDiv1.appendChild($ageInfo);
+            $newDiv1.appendChild($size);
+            $newDiv1.appendChild($sizeInfo);
+            $newDiv1.appendChild($languages);
+            $newDiv1.appendChild($languagesInfo);
+            $newDiv2.appendChild($alignment);
+            $newDiv2.appendChild($alignmentInfo);
+            $newDiv2.appendChild($asi);
+            $newDiv2.appendChild($asiInfo);
+            // $raceCharacteristics.appendChild($traits);
+            // $raceCharacteristics.appendChild($traitsInfo);
+          }
+        }
       }
     }
   });

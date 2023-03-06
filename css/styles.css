@@ -163,6 +163,10 @@ p {
   padding: 0 2rem;
 }
 
+#class {
+  padding: 0 2rem;
+}
+
 img {
   width: 6rem;
   height: 6rem;
@@ -205,18 +209,16 @@ img {
   cursor: pointer;
 }
 
+.character-content-area .centered-row:nth-child(1) {
+  align-items: center;
+}
+
 .character-content-area h4 {
   font-family: "Titillium Web", sans-serif;
   font-weight: 600;
   margin-top: 0;
   font-size: 1.5rem;
 }
-
-/* .character-content-area h5 {
-  font-family: "Titillium Web", sans-serif;
-  text-align: left;
-  margin-bottom: 0.15rem;
-} */
 
 .race-characteristics h5 {
   font-family: "Titillium Web", sans-serif;
@@ -280,8 +282,24 @@ img {
     padding: 0 12rem;
   }
 
+  #class {
+    padding: 0 12rem;
+  }
+
   .pic-wrapper h4 {
     font-size: 1.25rem;
+  }
+
+  .character-content-area {
+    max-width: 800px;
+  }
+
+  .character-content-area .fa-square-xmark {
+    right: 23rem;
+  }
+
+  .character-content-area h4 {
+    font-size: 1.5rem;
   }
 
   .pic-wrapper img {
@@ -292,5 +310,21 @@ img {
   .fa-circle-check {
     bottom: 2.5rem;
     left: 2.3rem;
+  }
+
+  .pic-wrapper .column-half {
+    padding: 0 1rem;
+  }
+
+  .pic-wrapper .column-full p {
+    padding: 2rem;
+  }
+
+  .pic-wrapper .race-characteristics div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-basis: 50%;
+    padding: 1rem;
   }
 }
