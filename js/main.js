@@ -88,21 +88,10 @@ for (var xMark of $xMarks) {
   });
 }
 
-// $xMark.addEventListener('click', function (event) {
-//   $dragonbornModal.setAttribute('class', 'modal-bg hidden');
-// });
-
 // var $picWrapper = document.querySelectorAll('#race .pic-wrapper');
 
 var $picContainerImg = document.querySelectorAll('.pic-container img');
 var $picContainer = document.querySelectorAll('.pic-container');
-
-// for (var picWrapper of $picWrapper) {
-//   picWrapper.addEventListener('dblclick', function (event) {
-//     picWrapper.setAttribute('class', 'modal-bg');
-//     ajaxRequest($dragonborn);
-//   });
-// }
 
 for (var picContainerImg of $picContainerImg) {
   picContainerImg.addEventListener('click', function (event) {
