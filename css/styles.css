@@ -21,6 +21,10 @@ h1:hover {
   cursor: pointer;
 }
 
+p {
+  font-family: Roboto, sans-serif;
+}
+
 .gallery-link {
   text-decoration: none;
   background-color: white;
@@ -43,7 +47,6 @@ h1:hover {
 
 .intro > p {
   font-size: 1rem;
-  font-family: Roboto, sans-serif;
   font-weight: 400;
   margin: auto 2rem;
   margin-bottom: 1.5rem;
@@ -59,7 +62,6 @@ h1:hover {
 
 .start-area > p {
   font-size: 1.15rem;
-  font-family: Roboto, sans-serif;
   font-weight: 500;
   margin: 0 2rem;
   margin-bottom: 1rem;
@@ -96,7 +98,6 @@ h1:hover {
 .intro-bottom > p {
   color: #757575;
   font-size: 0.85rem;
-  font-family: Roboto, sans-serif;
   font-weight: 400;
   padding: 4rem 2rem;
   text-align: center;
@@ -109,19 +110,38 @@ h1:hover {
 
 .character-creation-intro > p {
   font-size: 1rem;
-  font-family: Roboto, sans-serif;
   font-weight: 400;
   margin: auto 2rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-#character-form > h2 {
+.character-h2 {
   font-family: "Titillium Web", sans-serif;
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
   margin-bottom: 4rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.character-h2:hover {
+  cursor: pointer;
+}
+
+.character-h2-expanded {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.character-h2-expanded:hover {
+  cursor: pointer;
 }
 
 .fa-solid {
@@ -137,6 +157,161 @@ h1:hover {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   margin: 2rem auto;
+}
+
+#character-form {
+  padding: 0 2rem;
+}
+
+img {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  object-position: 50% 10%;
+  border-radius: 50%;
+}
+
+.pic-section {
+  text-align: center;
+}
+
+.pic-section p {
+  font-size: 0.85rem;
+  margin: 0.5rem auto;
+}
+
+.pic-section h4 {
+  font-family: Roboto, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.character-content-area img {
+  width: 7rem;
+  height: 7rem;
+}
+
+.pic-wrapper img:hover {
+  cursor: pointer;
+}
+
+.character-content-area .fa-square-xmark {
+  position: relative;
+  color: #d94a37;
+  font-size: 2rem;
+  right: 12rem;
+}
+
+.character-content-area .fa-square-xmark:hover {
+  cursor: pointer;
+}
+
+.character-content-area .centered-row:nth-child(1) {
+  align-items: center;
+}
+
+.character-content-area h4 {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 600;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.race-characteristics h5 {
+  font-family: "Titillium Web", sans-serif;
+  text-align: left;
+  margin-bottom: 0.15rem;
+  margin-top: 0;
+}
+
+.race-characteristics p {
+  font-size: 0.75rem;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.class-characteristics h5 {
+  font-family: "Titillium Web", sans-serif;
+  text-align: left;
+  margin-bottom: 0.15rem;
+  margin-top: 0;
+}
+
+.class-characteristics p {
+  font-size: 0.75rem;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.fa-circle-check {
+  position: absolute;
+  font-size: 3.5rem;
+  color: #00f946;
+  bottom: 1.5rem;
+  left: 1.3rem;
+}
+
+.fa-circle-check:hover {
+  cursor: pointer;
+}
+
+.selected-modal {
+  filter: brightness(0.6);
+}
+
+#ability-score-input {
+  margin: 2rem auto;
+}
+
+#ability-score-input p {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  flex-basis: calc(100%/3);
+}
+
+#ability-score-input input {
+  width: 3rem;
+  height: 3.5rem;
+  margin: 0.35rem 0.25rem 0;
+  border: 0.1rem solid #b6b6b6;
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#ability-score-input input::placeholder {
+  text-align: center;
+  font-size: 2rem;
+  margin: auto;
+}
+
+#ability-score-input input:focus::placeholder {
+  color: transparent;
+}
+
+#ability-score-input input:focus {
+  outline: 0.15rem solid #d94a37;
+  outline-offset: -0.2rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+#ability-score-info h4 {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 0;
+}
+
+#ability-score-info p {
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
 }
 
 @media screen and (min-width: 850px) {
@@ -165,5 +340,63 @@ h1:hover {
   .character-creation-intro > p {
     margin: auto 12rem;
     margin-bottom: 1rem;
+  }
+
+  #character-form {
+    padding: 0 12rem;
+  }
+
+  .pic-wrapper h4 {
+    font-size: 1.25rem;
+  }
+
+  .character-content-area {
+    max-width: 800px;
+  }
+
+  .character-content-area .fa-square-xmark {
+    right: 23rem;
+  }
+
+  .character-content-area h4 {
+    font-size: 1.5rem;
+  }
+
+  .pic-wrapper img {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .fa-circle-check {
+    bottom: 2.5rem;
+    left: 2.3rem;
+  }
+
+  .pic-wrapper .column-half {
+    padding: 0 1rem;
+  }
+
+  .pic-wrapper .column-full p {
+    padding: 2rem;
+  }
+
+  .pic-wrapper .race-characteristics div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-basis: 50%;
+    padding: 1rem;
+  }
+
+  .pic-wrapper .class-characteristics div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-basis: 50%;
+    padding: 1rem;
+  }
+
+  .pic-wrapper .class-characteristics p {
+    margin-left: 0;
   }
 }

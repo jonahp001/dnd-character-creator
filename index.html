@@ -63,9 +63,591 @@
           </div>
           <form id="character-form" class="centered-row">
             <!-- h2 subject to change -->
-            <h2>Select a Race:<i class="fa-solid fa-caret-left"></i></h2>
-            <h2>Select a Class:<i class="fa-solid fa-caret-left"></i></h2>
-            <h2>Ability Scores:<i class="fa-solid fa-caret-left"></i></h2>
+            <div id="race">
+              <h2 id="select-a-race" class="character-h2">Select a Race:<i id="race-caret" class="fa-solid fa-caret-left"></i></h2>
+              <div id="race-icons" class="pic-section hidden">
+                <p>Every character belongs to a race, one of the many intelligent humanoid species in the D&amp;D world. The most common player
+                character races are dwarves, elves, halflings, and humans.</p>
+                <p>The race you choose contributes to your character&apos;s identity in an important way, by establishing a general appearance
+                and the natural talents gained from culture and ancestry. Your character&apos;s race grants particular racial traits, such as
+                special senses, proficiency with certain weapons or tools, proficiency in one or more skills, or the ability to use
+                minor spells.</p>
+                <p>Please double-click on the races below to see more information and single-click on the one that you want to select.</p>
+                <div id="Dwarf" class="pic-wrapper">
+                  <h4>Dwarf</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/dwarf.png" alt="dwarf">
+                  </div>
+                  <div id="dwarf-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Dwarf</h4>
+                          <img src="images/DnD Races/dwarf.png" alt="dwarf">
+                          <p>Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal. Though they
+                            stand well under 5 feet tall, dwarves are so broad and compact that they can weigh as much as a human standing nearly two
+                            feet taller. Their courage and endurance are also easily a match for any of the larger folk.
+                            Dwarven skin ranges from deep brown to a paler hue tinged with red, but the most common shades are light brown
+                            or deep tan, like certain tones of earth. Their hair, worn long but in simple styles, is usually black, gray, or brown,
+                            though paler dwarves often have red hair. Male dwarves value their beards highly and groom them carefully.</p>
+                        </div>
+                        <div id="dwarf" class="race-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Elf" class="pic-wrapper">
+                  <h4>Elf</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/elf.png" alt="elf">
+                  </div>
+                  <div id="elf-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Elf</h4>
+                          <img src="images/DnD Races/elf.png" alt="elf">
+                          <p>Elves are a magical people of otherworldly grace, living in the world but not entirely part of it. They live in places
+                          of ethereal beauty, in the midst of ancient forests or in silvery spires glittering with faerie light, where soft music
+                          drifts through the air and gentle fragrances waft on the breeze. Elves love nature and magic, art and artistry, music
+                          and poetry, and the good things of the world.</p>
+                        </div>
+                        <div id="elf" class="race-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Halfling" class="pic-wrapper">
+                  <h4>Halfing</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/halfling.jpg" alt="halfling">
+                  </div>
+                  <div id="halfling-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Halfling</h4>
+                          <img src="images/DnD Races/halfling.jpg" alt="halfling">
+                          <p>The comforts of home are the goals of most halflings’ lives: a place to settle in peace and quiet, far from marauding
+                          monsters and clashing armies; a blazing fire and a generous meal; fine drink and fine conversation. Though some
+                          halflings live out their days in remote agricultural communities, others form nomadic bands that travel constantly,
+                          lured by the open road and the wide horizon to discover the wonders of new lands and peoples. But even these wanderers
+                          love peace, food, hearth, and home, though home might be a wagon jostling along a dirt road or a raft floating
+                          downriver.</p>
+                        </div>
+                        <div id="halfling" class="race-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Human" class="pic-wrapper">
+                  <h4>Human</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/human.webp" alt="human">
+                  </div>
+                  <div id="human-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Human</h4>
+                          <img src="images/DnD Races/human.webp" alt="human">
+                          <p>In the reckonings of most worlds, humans are the youngest of the common races, late to arrive on the world scene and
+                          short-lived in comparison to dwarves, elves, and dragons. Perhaps it is because of their shorter lives that they strive
+                          to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder
+                          races, and that&apos;s why they build their mighty empires on the foundation of conquest and trade. Whatever drives them,
+                          humans are the innovators, the achievers, and the pioneers of the worlds.</p>
+                        </div>
+                        <div id="human" class="race-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Dragonborn" class="pic-wrapper">
+                  <h4>Dragonborn</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/dragonborn.webp" alt="dragonborn">
+                  </div>
+                  <div id="dragonborn-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Dragonborn</h4>
+                          <img src="images/DnD Races/dragonborn.webp" alt="dragonborn">
+                          <p>Born of dragons, as their name proclaims, the dragonborn walk proudly through a world that greets them with
+                            fearful incomprehension. Shaped by draconic gods or the dragons themselves, dragonborn originally hatched from dragon eggs
+                            as a unique race, combining the best attributes of dragons and humanoids. Some dragonborn are faithful servants to true
+                            dragons, others form the ranks of soldiers in great wars, and still others find themselves adrift, with no clear
+                            calling in life.</p>
+                        </div>
+                        <div id="dragonborn" class="race-characteristics row">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Gnome" class="pic-wrapper">
+                  <h4>Gnome</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/gnome.jpg" alt="gnome">
+                  </div>
+                  <div id="gnome-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Gnome</h4>
+                          <img src="images/DnD Races/gnome.jpg" alt="gnome">
+                          <p>A constant hum of busy activity pervades the warrens and neighborhoods where gnomes form their close-knit communities.
+                          Louder sounds punctuate the hum: a crunch of grinding gears here, a minor explosion there, a yelp of surprise or
+                          triumph, and especially bursts of laughter. Gnomes take delight in life, enjoying every moment of invention,
+                          exploration, investigation, creation, and play.</p>
+                        </div>
+                        <div id="gnome" class="race-characteristics row">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Half-Elf" class="pic-wrapper">
+                  <h4>Half-Elf</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/half-elf.jpg" alt="half-elf">
+                  </div>
+                  <div id="half-elf-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Half-Elf</h4>
+                          <img src="images/DnD Races/half-elf.jpg" alt="half-elf">
+                          <p>Walking in two worlds but truly belonging to neither, half-elves combine what some say are the best qualities of their
+                          elf and human parents: human curiosity, inventiveness, and ambition tempered by the refined senses, love of nature, and
+                          artistic tastes of the elves. Some half-elves live among humans, set apart by their emotional and physical differences,
+                          watching friends and loved ones age while time barely touches them. Others live with the elves, growing restless as they
+                          reach adulthood in the timeless elven realms, while their peers continue to live as children. Many half-elves, unable to
+                          fit into either society, choose lives of solitary wandering or join with other misfits and outcasts in the adventuring
+                          life.</p>
+                        </div>
+                        <div id="half-elf" class="race-characteristics row">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Half-Orc" class="pic-wrapper">
+                  <h4>Half-Orc</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/half-orc.jpg" alt="half-orc">
+                  </div>
+                  <div id="half-orc-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Half-Orc</h4>
+                          <img src="images/DnD Races/half-orc.jpg" alt="half-orc">
+                          <p>Whether united under the leadership of a mighty warlock or having fought to a standstill after years of conflict, orc
+                          and human communities, sometimes form alliances. When these alliances are sealed by marriages, half-orcs are born. Some
+                          half-orcs rise to become proud leaders of orc communities. Some venture into the world to prove their worth. Many of
+                          these become adventurers, achieving greatness for their mighty deeds.</p>
+                        </div>
+                        <div id="half-orc" class="race-characteristics row">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Tiefling" class="pic-wrapper">
+                  <h4>Tiefling</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Races/tiefling.jpg" alt="tiefling">
+                  </div>
+                  <div id="tiefling-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Tiefling</h4>
+                          <img src="images/DnD Races/tiefling.jpg" alt="tiefling">
+                          <p>To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every
+                          eye: this is the lot of the tiefling. And to twist the knife, tieflings know that this is because a pact struck
+                          generations ago infused the essence of Asmodeus—overlord of the Nine Hells—into their bloodline. Their appearance and
+                          their nature are not their fault but the result of an ancient sin, for which they and their children and their
+                          children&apos;s children will always be held accountable.</p>
+                        </div>
+                        <div id="tiefling" class="race-characteristics row">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="class">
+              <h2 id="select-a-class" class="character-h2">Select a Class:<i id="class-caret" class="fa-solid fa-caret-left"></i></h2>
+              <div id="class-icons" class="pic-section hidden">
+                <p>Every adventurer is a member of a class. Class broadly describes a character&apos;s vocation, what special talents he or she
+                possesses, and the tactics he or she is most likely to employ when exploring a dungeon, fighting monsters, or engaging
+                in a tense negotiation.</p>
+                <p>Please double-click on the classes below to see more information and single-click on the one that you want to select.</p>
+                <div id="Barbarian" class="pic-wrapper">
+                  <h4>Barbarian</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/barbarian.png" alt="barbarian">
+                  </div>
+                  <div id="barbarian-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Barbarian</h4>
+                          <img src="images/DnD Classes/barbarian.png" alt="barbarian">
+                          <p>People of towns and cities take pride in how their civilized ways set them apart from animals, as if denying one&apos;s own
+                          nature was a mark of superiority. To a barbarian, though, civilization is no virtue, but a sign of weakness. The strong
+                          embrace their animal nature—keen instincts, primal physicality, and ferocious rage. Barbarians are uncomfortable when
+                          hedged in by walls and crowds. They thrive in the wilds of their homelands: the tundra, jungle, or grasslands where
+                          their tribes live and hunt.</p>
+                        </div>
+                        <div id="barbarian" class="class-characteristics row">
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Bard" class="pic-wrapper">
+                  <h4>Bard</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/bard.webp" alt="bard">
+                  </div>
+                  <div id="bard-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Bard</h4>
+                          <img src="images/DnD Classes/bard.webp" alt="bard">
+                          <p>In the worlds of D&amp;D, words and music are not just vibrations of air, but vocalizations with power all their own. The
+                          bard is a master of song, speech, and the magic they contain. Bards say that the multiverse was spoken into existence,
+                          that the words of the gods gave it shape, and that echoes of these primordial Words of Creation still resound throughout
+                          the cosmos. The music of bards is an attempt to snatch and harness those echoes, subtly woven into their spells and
+                          powers.</p>
+                        </div>
+                        <div id="bard" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Cleric" class="pic-wrapper">
+                  <h4>Cleric</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/cleric.webp" alt="cleric">
+                  </div>
+                  <div id="cleric-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Cleric</h4>
+                          <img src="images/DnD Classes/cleric.webp" alt="cleric">
+                          <p>Divine magic, as the name suggests, is the power of the gods, flowing from them into the world. Clerics are conduits for
+                          that power, manifesting it as miraculous effects. The gods don&apos;t grant this power to everyone who seeks it, but only to
+                          those chosen to fulfill a high calling.
+
+                          Harnessing divine magic doesn&apos;t rely on study or training. A cleric might learn formulaic prayers and ancient rites, but
+                          the ability to cast cleric spells relies on devotion and an intuitive sense of a deity&apos;s wishes.</p>
+                        </div>
+                        <div id="cleric" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Druid" class="pic-wrapper">
+                  <h4>Druid</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/druid.webp" alt="druid">
+                  </div>
+                  <div id="druid-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Druid</h4>
+                          <img src="images/DnD Classes/druid.webp" alt="druid">
+                          <p>Druids revere nature above all, gaining their spells and other magical powers either from the force of nature itself or
+                          from a nature deity. Many druids pursue a mystic spirituality of transcendent union with nature rather than devotion to
+                          a divine entity, while others serve gods of wild nature, animals, or elemental forces. The ancient druidic traditions
+                          are sometimes called the Old Faith, in contrast to the worship of gods in temples and shrines.</p>
+                        </div>
+                        <div id="druid" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Fighter" class="pic-wrapper">
+                  <h4>Fighter</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/fighter.png" alt="fighter">
+                  </div>
+                  <div id="fighter-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Fighter</h4>
+                          <img src="images/DnD Classes/fighter.png" alt="fighter">
+                          <p>Fighters learn the basics of all combat styles. Every fighter can swing an axe, fence with a rapier, wield a longsword
+                          or a greatsword, use a bow, and even trap foes in a net with some degree of skill. Likewise, a fighter is adept with
+                          shields and every form of armor. Beyond that basic degree of familiarity, each fighter specializes in a certain style of
+                          combat. Some concentrate on archery, some on fighting with two weapons at once, and some on augmenting their martial
+                          skills with magic. This combination of broad general ability and extensive specialization makes fighters superior
+                          combatants on battlefields and in dungeons alike.</p>
+                        </div>
+                        <div id="fighter" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Monk" class="pic-wrapper">
+                  <h4>Monk</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/monk.jpg" alt="monk">
+                  </div>
+                  <div id="monk-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Monk</h4>
+                          <img src="images/DnD Classes/monk.jpg" alt="monk">
+                          <p>Monks make careful study of a magical energy that most monastic traditions call ki. This energy is an element of the
+                          magic that suffuses the multiverse—specifically, the element that flows through living bodies. Monks harness this power
+                          within themselves to create magical effects and exceed their bodies&apos; physical capabilities, and some of their special
+                          attacks can hinder the flow of ki in their opponents. Using this energy, monks channel uncanny speed and strength into
+                          their unarmed strikes. As they gain experience, their martial training and their mastery of ki gives them more power
+                          over their bodies and the bodies of their foes.</p>
+                        </div>
+                        <div id="monk" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Paladin" class="pic-wrapper">
+                  <h4>Paladin</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/Paladin.webp" alt="paladin">
+                  </div>
+                  <div id="paladin-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Paladin</h4>
+                          <img src="images/DnD Classes/Paladin.webp" alt="paladin">
+                          <p>A paladin swears to uphold justice and righteousness, to stand with the good things of the world against the encroaching
+                          darkness, and to hunt the forces of evil wherever they lurk. Different paladins focus on various aspects of the cause of
+                          righteousness, but all are bound by the oaths that grant them power to do their sacred work. Although many paladins are
+                          devoted to gods of good, a paladin&apos;s power comes as much from a commitment to justice itself as it does from a god.</p>
+                        </div>
+                        <div id="paladin" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Ranger" class="pic-wrapper">
+                  <h4>Ranger</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/ranger.jpg" alt="ranger">
+                  </div>
+                  <div id="ranger-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Ranger</h4>
+                          <img src="images/DnD Classes/ranger.jpg" alt="ranger">
+                          <p>Warriors of the wilderness, rangers specialize in hunting the monsters that threaten the edges of civilization—humanoid
+                          raiders, rampaging beasts and monstrosities, terrible giants, and deadly dragons. They learn to track their quarry as a
+                          predator does, moving stealthily through the wilds and hiding themselves in brush and rubble. Rangers focus their combat
+                          training on techniques that are particularly useful against their specific favored foes.</p>
+                        </div>
+                        <div id="ranger" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Rogue" class="pic-wrapper">
+                  <h4>Rogue</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/rogue.jpg" alt="rogue">
+                  </div>
+                  <div id="rogue-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Rogue</h4>
+                          <img src="images/DnD Classes/rogue.jpg" alt="rogue">
+                          <p>Rogues devote as much effort to mastering the use of a variety of skills as they do to perfecting their combat
+                          abilities, giving them a broad expertise that few other characters can match. Many rogues focus on stealth and
+                          deception, while others refine the skills that help them in a dungeon environment, such as climbing, finding and
+                          disarming traps, and opening locks.</p>
+                        </div>
+                        <div id="rogue" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Sorcerer" class="pic-wrapper">
+                  <h4>Sorcerer</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/sorcerer.jpg" alt="sorcerer">
+                  </div>
+                  <div id="sorcerer-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Sorcerer</h4>
+                          <img src="images/DnD Classes/sorcerer.jpg" alt="sorcerer">
+                          <p>Magic is a part of every sorcerer, suffusing body, mind, and spirit with a latent power that waits to be tapped. Some
+                          sorcerers wield magic that springs from an ancient bloodline infused with the magic of dragons. Others carry a raw,
+                          uncontrolled magic within them, a chaotic storm that manifests in unexpected ways.</p>
+                        </div>
+                        <div id="sorcerer" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Warlock" class="pic-wrapper">
+                  <h4>Warlock</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/warlock.jpeg" alt="warlock">
+                  </div>
+                  <div id="warlock-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Warlock</h4>
+                          <img src="images/DnD Classes/warlock.jpeg" alt="warlock">
+                          <p>A warlock is defined by a pact with an otherworldly being. Sometimes the relationship between warlock and patron is like
+                          that of a cleric and a deity, though the beings that serve as patrons for warlocks are not gods. A warlock might lead a
+                          cult dedicated to a demon prince, an archdevil, or an utterly alien entity—beings not typically served by clerics. More
+                          often, though, the arrangement is similar to that between a master and an apprentice. The warlock learns and grows in
+                          power, at the cost of occasional services performed on the patron&apos;s behalf.</p>
+                        </div>
+                        <div id="warlock" class="class-characteristics row">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="Wizard" class="pic-wrapper">
+                  <h4>Wizard</h4>
+                  <div class="pic-container">
+                    <img src="images/DnD Classes/wizard.jpg" alt="wizard">
+                  </div>
+                  <div id="wizard-modal" class="modal-bg hidden">
+                    <div class="character-content-area">
+                      <i class="fa-solid fa-square-xmark"></i>
+                      <div class="row">
+                        <div class="column-full centered-row">
+                          <h4>Wizard</h4>
+                          <img src="images/DnD Classes/wizard.jpg" alt="wizard">
+                          <p>Wild and enigmatic, varied in form and function, the power of magic draws students who seek to master its mysteries.
+                          Some aspire to become like the gods, shaping reality itself. Though the casting of a typical spell requires merely the
+                          utterance of a few strange words, fleeting gestures, and sometimes a pinch or clump of exotic materials, these surface
+                          components barely hint at the expertise attained after years of apprenticeship and countless hours of study.</p>
+                        </div>
+                        <div id="wizard" class="class-characteristics row">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="ability-score">
+              <h2 id="input-ability-scores" class="character-h2">Ability Scores:<i id="ability-score-caret" class="fa-solid fa-caret-left"></i></h2>
+              <div id="ability-score-content" class="hidden">
+                <div id="ability-score-intro" class="pic-section">
+                  <p>There are 6 different abilities in Dungeons and Dragons that gauge the physical and mental characteristics of each
+                  character in D&amp;D.</p>
+                  <p>There are different methods for generating the numbers for these scores, but an easy way to generate some scores is to
+                  roll 3 d6 per category, and the total of the 3 rolls is the score for the given category.</p>
+                  <p>There are brief descriptions of each category listed as well.</p>
+                </div>
+                <div id="ability-score-input" class="pic-section">
+                  <p>STR<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>DEX<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>CON<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>INT<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>WIS<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>CHA<br><input type="number" min="0" placeholder="-" required></p>
+                </div>
+                <div id="ability-score-info">
+                  <div class="ability-info">
+                    <h4>Strength (STR)</h4>
+                    <p>Strength measures bodily power, athletic training, and the extent to which you can exert raw physical force.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Dexterity (DEX)</h4>
+                    <p>Dexterity measures agility, reflexes, and balance.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Constitution (CON)</h4>
+                    <p>Constitution measures health, stamina, and vital force.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Intelligence (INT)</h4>
+                    <p>Intelligence measures mental acuity, accuracy of recall, and the ability to reason.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Wisdom (WIS)</h4>
+                    <p>Strength measures bodiWisdom reflects how attuned you are to the world around you and represents perceptiveness and intuition.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Charisma (CHA)</h4>
+                    <p>Charisma measures your ability to interact effectively with others. It includes such factors as confidence and
+                    eloquence, and it can represent a charming or commanding personality.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <button id="submit-button" type="submit">SUBMIT</button>
           </form>
         </div>

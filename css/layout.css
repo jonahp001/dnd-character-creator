@@ -31,6 +31,41 @@
   border-radius: 1rem;
 }
 
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 0 1rem;
+  z-index: 1;
+}
+
+.character-content-area {
+  background-color: rgba(255, 255, 255, 0.85);
+  min-height: 90vh;
+  max-width: 450px;
+  margin: 3rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.pic-section,
+#ability-score-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pic-wrapper {
+  flex-basis: calc(100%/3);
+}
+
+.pic-container {
+  position: relative;
+  margin: auto;
+  width: fit-content;
+  z-index: 0;
+}
+
 .column-full,
 .column-half {
   width: 100%;
