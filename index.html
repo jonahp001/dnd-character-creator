@@ -309,7 +309,7 @@
                     <img src="images/DnD Classes/barbarian.png" alt="barbarian">
                   </div>
                   <div id="barbarian-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -335,7 +335,7 @@
                     <img src="images/DnD Classes/bard.webp" alt="bard">
                   </div>
                   <div id="bard-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -360,7 +360,7 @@
                     <img src="images/DnD Classes/cleric.webp" alt="cleric">
                   </div>
                   <div id="cleric-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -386,7 +386,7 @@
                     <img src="images/DnD Classes/druid.webp" alt="druid">
                   </div>
                   <div id="druid-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -410,7 +410,7 @@
                     <img src="images/DnD Classes/fighter.png" alt="fighter">
                   </div>
                   <div id="fighter-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -436,7 +436,7 @@
                     <img src="images/DnD Classes/monk.jpg" alt="monk">
                   </div>
                   <div id="monk-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -462,7 +462,7 @@
                     <img src="images/DnD Classes/Paladin.webp" alt="paladin">
                   </div>
                   <div id="paladin-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -486,7 +486,7 @@
                     <img src="images/DnD Classes/ranger.jpg" alt="ranger">
                   </div>
                   <div id="ranger-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -510,7 +510,7 @@
                     <img src="images/DnD Classes/rogue.jpg" alt="rogue">
                   </div>
                   <div id="rogue-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -534,7 +534,7 @@
                     <img src="images/DnD Classes/sorcerer.jpg" alt="sorcerer">
                   </div>
                   <div id="sorcerer-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -557,7 +557,7 @@
                     <img src="images/DnD Classes/warlock.jpeg" alt="warlock">
                   </div>
                   <div id="warlock-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -581,7 +581,7 @@
                     <img src="images/DnD Classes/wizard.jpg" alt="wizard">
                   </div>
                   <div id="wizard-modal" class="modal-bg hidden">
-                    <div class="class-content-area">
+                    <div class="character-content-area">
                       <i class="fa-solid fa-square-xmark"></i>
                       <div class="row">
                         <div class="column-full centered-row">
@@ -602,9 +602,51 @@
               </div>
             </div>
             <div id="ability-score">
-              <h2 class="character-h2">Ability Scores:<i class="fa-solid fa-caret-left"></i>
-
-              </h2>
+              <h2 id="input-ability-scores" class="character-h2">Ability Scores:<i id="ability-score-caret" class="fa-solid fa-caret-left"></i></h2>
+              <div id="ability-score-content" class="hidden">
+                <div id="ability-score-intro" class="pic-section">
+                  <p>There are 6 different abilities in Dungeons and Dragons that gauge the physical and mental characteristics of each
+                  character in D&amp;D.</p>
+                  <p>There are different methods for generating the numbers for these scores, but an easy way to generate some scores is to
+                  roll 3 d6 per category, and the total of the 3 rolls is the score for the given category.</p>
+                  <p>There are brief descriptions of each category listed as well.</p>
+                </div>
+                <div id="ability-score-input" class="pic-section">
+                  <p>STR<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>DEX<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>CON<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>INT<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>WIS<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>CHA<br><input type="number" min="0" placeholder="-" required></p>
+                </div>
+                <div id="ability-score-info">
+                  <div class="ability-info">
+                    <h4>Strength (STR)</h4>
+                    <p>Strength measures bodily power, athletic training, and the extent to which you can exert raw physical force.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Dexterity (DEX)</h4>
+                    <p>Dexterity measures agility, reflexes, and balance.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Constitution (CON)</h4>
+                    <p>Constitution measures health, stamina, and vital force.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Intelligence (INT)</h4>
+                    <p>Intelligence measures mental acuity, accuracy of recall, and the ability to reason.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Wisdom (WIS)</h4>
+                    <p>Strength measures bodiWisdom reflects how attuned you are to the world around you and represents perceptiveness and intuition.</p>
+                  </div>
+                  <div class="ability-info">
+                    <h4>Charisma (CHA)</h4>
+                    <p>Charisma measures your ability to interact effectively with others. It includes such factors as confidence and
+                    eloquence, and it can represent a charming or commanding personality.</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <button id="submit-button" type="submit">SUBMIT</button>
           </form>

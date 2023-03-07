@@ -11,10 +11,15 @@ var $selectAClass = document.querySelector('#select-a-class');
 var $classCaret = document.querySelector('#class-caret');
 var $classIcons = document.querySelector('#class-icons');
 
-var $xMarks = document.querySelectorAll('#race .fa-square-xmark');
-var $xMarkRaceModals = document.querySelectorAll('.pic-wrapper .modal-bg');
+var $inputAbilityScores = document.querySelector('#input-ability-scores');
+var $abilityScoreCaret = document.querySelector('#ability-score-caret');
+var $abilityScoreContent = document.querySelector('#ability-score-content');
+
+var $xMarks = document.querySelectorAll('#character-creation-page .fa-square-xmark');
+var $xMarkModals = document.querySelectorAll('.pic-wrapper .modal-bg');
 
 var $racePicWrapper = document.querySelectorAll('#race .pic-wrapper');
+var $classPicWrapper = document.querySelectorAll('#class .pic-wrapper');
 
 // function ajaxRequest() {
 //   var xhr = new XMLHttpRequest();
@@ -66,62 +71,92 @@ $selectAClass.addEventListener('click', function (event) {
   }
 });
 
+$inputAbilityScores.addEventListener('click', function (event) {
+  if (event.target.getAttribute('class') === 'character-h2') {
+    $inputAbilityScores.setAttribute('class', 'character-h2-expanded');
+    $abilityScoreCaret.setAttribute('class', 'fa-solid fa-caret-down');
+    $abilityScoreContent.setAttribute('class', '');
+  } else if (event.target.getAttribute('class') === 'character-h2-expanded') {
+    $inputAbilityScores.setAttribute('class', 'character-h2');
+    $abilityScoreCaret.setAttribute('class', 'fa-solid fa-caret-left');
+    $abilityScoreContent.setAttribute('class', 'hidden');
+  }
+});
+
 // var $racePicWrapperArray = Array.from($racePicWrapper);
 // console.log($racePicWrapperArray);
 
 $racePicWrapper.forEach(race => {
   race.addEventListener('dblclick', function (event) {
     race.childNodes[5].setAttribute('class', 'modal-bg');
-    ajaxRequest(race);
+    ajaxRequestRace(race);
   });
 });
 
-// console.log($xMarks[0].parentElement.parentElement);
+$classPicWrapper.forEach(className => {
+  className.addEventListener('dblclick', function (event) {
+    className.childNodes[5].setAttribute('class', 'modal-bg');
+    ajaxRequestClass(className);
+  });
+});
 
 for (var xMark of $xMarks) {
   xMark.addEventListener('click', function (event) {
     for (var i = 0; i < $xMarks.length; i++) {
-      if (event.target.parentElement.parentElement === $xMarkRaceModals[i]) {
-        $xMarkRaceModals[i].setAttribute('class', 'modal-bg hidden');
+      if (event.target.parentElement.parentElement === $xMarkModals[i]) {
+        $xMarkModals[i].setAttribute('class', 'modal-bg hidden');
       }
     }
   });
 }
 
-// var $picWrapper = document.querySelectorAll('#race .pic-wrapper');
+var $racePicContainerImg = document.querySelectorAll('#race .pic-container img');
+var $racePicContainer = document.querySelectorAll('#race .pic-container');
 
-var $picContainerImg = document.querySelectorAll('.pic-container img');
-var $picContainer = document.querySelectorAll('.pic-container');
-
-for (var picContainerImg of $picContainerImg) {
-  picContainerImg.addEventListener('click', function (event) {
-    for (var i = 0; i < $picContainerImg.length; i++) {
-      if (event.target === $picContainer[i].childNodes[1]) {
-        for (var j = 0; j < $picContainer.length; j++) {
-          if ($picContainer[j].childNodes[3] !== undefined) {
-            $picContainer[j].childNodes[3].remove();
-            $picContainer[j].childNodes[1].setAttribute('class', '');
+for (var racePicContainerImg of $racePicContainerImg) {
+  racePicContainerImg.addEventListener('click', function (event) {
+    for (var i = 0; i < $racePicContainerImg.length; i++) {
+      if (event.target === $racePicContainer[i].childNodes[1]) {
+        for (var j = 0; j < $racePicContainer.length; j++) {
+          if ($racePicContainer[j].childNodes[3] !== undefined) {
+            $racePicContainer[j].childNodes[3].remove();
+            $racePicContainer[j].childNodes[1].setAttribute('class', '');
           }
         }
-        event.target.setAttribute('class', 'selected-race-modal');
+        event.target.setAttribute('class', 'selected-modal');
         var $checkMark = document.createElement('i');
         $checkMark.setAttribute('class', 'fa-regular fa-circle-check');
-        $picContainer[i].appendChild($checkMark);
+        $racePicContainer[i].appendChild($checkMark);
+      }
+    }
+  });
+}
+
+var $classPicContainerImg = document.querySelectorAll('#class .pic-container img');
+var $classPicContainer = document.querySelectorAll('#class .pic-container');
+
+for (var classPicContainerImg of $classPicContainerImg) {
+  classPicContainerImg.addEventListener('click', function (event) {
+    for (var i = 0; i < $classPicContainerImg.length; i++) {
+      if (event.target === $classPicContainer[i].childNodes[1]) {
+        for (var j = 0; j < $classPicContainer.length; j++) {
+          if ($classPicContainer[j].childNodes[3] !== undefined) {
+            $classPicContainer[j].childNodes[3].remove();
+            $classPicContainer[j].childNodes[1].setAttribute('class', '');
+          }
+        }
+        event.target.setAttribute('class', 'selected-modal');
+        var $checkMark = document.createElement('i');
+        $checkMark.setAttribute('class', 'fa-regular fa-circle-check');
+        $classPicContainer[i].appendChild($checkMark);
       }
     }
   });
 }
 
 var $raceCharacteristics = document.querySelectorAll('.pic-wrapper .race-characteristics');
-// var $raceH5 = document.querySelectorAll('.race-characteristics h5');
-// console.log($raceCharacteristics);
-// console.log($raceCharacteristics[4].id);
-// console.log($raceCharacteristics[4].childNodes.length);
-// console.log($raceCharacteristics[4].children.length);
 
-// console.log($dragonborn);
-
-function ajaxRequest(raceName) {
+function ajaxRequestRace(raceName) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.open5e.com/races/');
   xhr.responseType = 'json';
@@ -176,6 +211,81 @@ function ajaxRequest(raceName) {
             $newDiv2.appendChild($asiInfo);
             // $raceCharacteristics.appendChild($traits);
             // $raceCharacteristics.appendChild($traitsInfo);
+          }
+        }
+      }
+    }
+  });
+  xhr.send();
+}
+
+var $classCharacteristics = document.querySelectorAll('.pic-wrapper .class-characteristics');
+
+function ajaxRequestClass(className) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.open5e.com/classes/');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    for (var i = 0; i < xhr.response.results.length; i++) {
+      if (xhr.response.results[i].name === className.getAttribute('id') && $classCharacteristics[i].childNodes.length <= 1) {
+        var $equipment = document.createElement('h5');
+        $equipment.textContent = 'Equipment:';
+        var $equipmentInfo = document.createElement('p');
+        $equipmentInfo.textContent = xhr.response.results[i].equipment;
+        var $spellcastAbil = document.createElement('h5');
+        $spellcastAbil.textContent = 'Spellcasting Ability:';
+        var $spellcastAbilInfo = document.createElement('p');
+        $spellcastAbilInfo.textContent = xhr.response.results[i].spellcasting_ability;
+        var $hitDice = document.createElement('h5');
+        $hitDice.textContent = 'Hit Dice:';
+        var $hitDiceInfo = document.createElement('p');
+        $hitDiceInfo.textContent = xhr.response.results[i].hit_dice;
+        var $hp1stLevel = document.createElement('h5');
+        $hp1stLevel.textContent = 'HP at 1st Level:';
+        var $hp1stLevelInfo = document.createElement('p');
+        $hp1stLevelInfo.textContent = xhr.response.results[i].hp_at_1st_level;
+        var $hpHigherLevels = document.createElement('h5');
+        $hpHigherLevels.textContent = 'HP at Higher Levels:';
+        var $hpHigherLevelsInfo = document.createElement('p');
+        $hpHigherLevelsInfo.textContent = xhr.response.results[i].hp_at_higher_levels;
+        var $weaponProf = document.createElement('h5');
+        $weaponProf.textContent = 'Weapon Proficiency:';
+        var $weaponProfInfo = document.createElement('p');
+        $weaponProfInfo.textContent = xhr.response.results[i].prof_weapons;
+        var $armorProf = document.createElement('h5');
+        $armorProf.textContent = 'Armor Proficiency:';
+        var $armorProfInfo = document.createElement('p');
+        $armorProfInfo.textContent = xhr.response.results[i].prof_armor;
+        var $skillProf = document.createElement('h5');
+        $skillProf.textContent = 'Skill Proficiency:';
+        var $skillProfInfo = document.createElement('p');
+        $skillProfInfo.textContent = xhr.response.results[i].prof_skills;
+        var $savingThrowProf = document.createElement('h5');
+        $savingThrowProf.textContent = 'Saving Throw Proficiency:';
+        var $savingThrowProfInfo = document.createElement('p');
+        $savingThrowProfInfo.textContent = xhr.response.results[i].prof_saving_throws;
+        var $newDiv1 = document.createElement('div');
+        var $newDiv2 = document.createElement('div');
+        for (var j = 0; j < $classCharacteristics.length; j++) {
+          if (xhr.response.results[i].slug === $classCharacteristics[j].id) {
+            $classCharacteristics[j].appendChild($newDiv1);
+            $classCharacteristics[j].appendChild($newDiv2);
+            $newDiv1.appendChild($equipment);
+            $newDiv1.appendChild($equipmentInfo);
+            $newDiv1.appendChild($spellcastAbil);
+            $newDiv1.appendChild($spellcastAbilInfo);
+            $newDiv1.appendChild($hitDice);
+            $newDiv1.appendChild($hitDiceInfo);
+            $newDiv1.appendChild($hp1stLevel);
+            $newDiv1.appendChild($hp1stLevelInfo);
+            $newDiv2.appendChild($weaponProf);
+            $newDiv2.appendChild($weaponProfInfo);
+            $newDiv2.appendChild($armorProf);
+            $newDiv2.appendChild($armorProfInfo);
+            $newDiv2.appendChild($skillProf);
+            $newDiv2.appendChild($skillProfInfo);
+            $newDiv2.appendChild($savingThrowProf);
+            $newDiv2.appendChild($savingThrowProfInfo);
           }
         }
       }

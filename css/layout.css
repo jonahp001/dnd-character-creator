@@ -48,7 +48,8 @@
   border-radius: 1rem;
 }
 
-.pic-section {
+.pic-section,
+#ability-score-content {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
