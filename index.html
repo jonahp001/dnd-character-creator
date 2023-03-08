@@ -612,12 +612,12 @@
                   <p>There are brief descriptions of each category listed as well.</p>
                 </div>
                 <div id="ability-score-input" class="pic-section">
-                  <p>STR<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>DEX<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>CON<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>INT<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>WIS<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>CHA<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>STR<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>DEX<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>CON<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>INT<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>WIS<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>CHA<br><input type="number" min="0" max="30" placeholder="-" required></p>
                 </div>
                 <div id="ability-score-info">
                   <div class="ability-info">
@@ -638,7 +638,7 @@
                   </div>
                   <div class="ability-info">
                     <h4>Wisdom (WIS)</h4>
-                    <p>Strength measures bodiWisdom reflects how attuned you are to the world around you and represents perceptiveness and intuition.</p>
+                    <p>Wisdom reflects how attuned you are to the world around you and represents perceptiveness and intuition.</p>
                   </div>
                   <div class="ability-info">
                     <h4>Charisma (CHA)</h4>
@@ -649,6 +649,38 @@
               </div>
             </div>
             <button id="submit-button" type="submit">SUBMIT</button>
+          </form>
+        </div>
+      </section>
+      <section id="final-character-adjustments" class="hidden">
+        <div class="content-area">
+          <form>
+            <div class="centered-row">
+              <input type="text" placeholder="Enter your character name" required>
+              <img id="placeholder-img" src="images/placeholder-image-square.jpg" alt="placeholder image">
+              <input class="photoUrl" type="text" placeholder="Photo URL">
+            </div>
+            <div id="character-info">
+              <div id="AS">
+                <h4>Ability Score:</h4>
+                <div id="character-ability-score" class="row">
+
+                </div>
+              </div>
+              <div>
+                <h4>Race:</h4>
+                <div id="character-race"></div>
+              </div>
+              <div>
+                <h4>Class:</h4>
+                <div id="character-class"></div>
+              </div>
+              <div class="centered-row">
+                <h4>Description:</h4>
+                <textarea placeholder="Write a description of your character"></textarea>
+              </div>
+            </div>
+            <button class="centered-row" id="character-submit-button" type="submit">SAVE</button>
           </form>
         </div>
       </section>

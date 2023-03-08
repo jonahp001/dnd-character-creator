@@ -21,27 +21,19 @@ var $xMarkModals = document.querySelectorAll('.pic-wrapper .modal-bg');
 var $racePicWrapper = document.querySelectorAll('#race .pic-wrapper');
 var $classPicWrapper = document.querySelectorAll('#class .pic-wrapper');
 
-// function ajaxRequest() {
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'https://api.open5e.com/races/');
-//   xhr.responseType = 'json';
-//   xhr.addEventListener('load', function () {
-//     console.log(xhr.status);
-//     console.log(xhr.response);
-//     console.log(xhr.response.results);
-//     console.log(xhr.response.results[4].age);
-//   });
-//   xhr.send();
-// }
+var $submitButton = document.querySelector('#character-creation-page form');
 
-// ajaxRequest();
+var $raceCheckMark;
+var $classCheckMark;
+
+var $photoUrl = document.querySelector('#final-character-adjustments .photoUrl');
+var $placeHolderImg = document.querySelector('#placeholder-img');
 
 $startButton.addEventListener('click', function (event) {
   $homePage.setAttribute('class', 'hidden');
   $characterCreationPage.setAttribute('class', '');
 });
 
-// CODE BELOW SUBJECT TO CHANGE
 $h1TitleText.addEventListener('click', function (event) {
   $homePage.setAttribute('class', '');
   $characterCreationPage.setAttribute('class', 'hidden');
@@ -83,9 +75,6 @@ $inputAbilityScores.addEventListener('click', function (event) {
   }
 });
 
-// var $racePicWrapperArray = Array.from($racePicWrapper);
-// console.log($racePicWrapperArray);
-
 $racePicWrapper.forEach(race => {
   race.addEventListener('dblclick', function (event) {
     race.childNodes[5].setAttribute('class', 'modal-bg');
@@ -126,9 +115,11 @@ for (var racePicContainerImg of $racePicContainerImg) {
         event.target.setAttribute('class', 'selected-modal');
         var $checkMark = document.createElement('i');
         $checkMark.setAttribute('class', 'fa-regular fa-circle-check');
+        $checkMark.setAttribute('id', 'race-check-mark');
         $racePicContainer[i].appendChild($checkMark);
       }
     }
+    $raceCheckMark = document.querySelector('#race-check-mark');
   });
 }
 
@@ -148,9 +139,11 @@ for (var classPicContainerImg of $classPicContainerImg) {
         event.target.setAttribute('class', 'selected-modal');
         var $checkMark = document.createElement('i');
         $checkMark.setAttribute('class', 'fa-regular fa-circle-check');
+        $checkMark.setAttribute('id', 'class-check-mark');
         $classPicContainer[i].appendChild($checkMark);
       }
     }
+    $classCheckMark = document.querySelector('#class-check-mark');
   });
 }
 
@@ -293,3 +286,112 @@ function ajaxRequestClass(className) {
   });
   xhr.send();
 }
+
+var $finalCharacterAdjustments = document.querySelector('#final-character-adjustments');
+var $characterAbilityScore = document.querySelector('#character-ability-score');
+var $characterRace = document.querySelector('#character-race');
+var $characterClass = document.querySelector('#character-class');
+
+$submitButton.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  var raceName = $raceCheckMark.parentNode.parentNode.childNodes[1].textContent;
+  var className = $classCheckMark.parentNode.parentNode.childNodes[1].textContent;
+  var abilityScores = {};
+
+  var str = event.target.elements[0].value;
+  var dex = event.target.elements[1].value;
+  var con = event.target.elements[2].value;
+  var int = event.target.elements[3].value;
+  var wis = event.target.elements[4].value;
+  var cha = event.target.elements[5].value;
+  abilityScores.STR = str;
+  abilityScores.DEX = dex;
+  abilityScores.CON = con;
+  abilityScores.INT = int;
+  abilityScores.WIS = wis;
+  abilityScores.CHA = cha;
+
+  var characterObj = {};
+
+  characterObj.race = raceName;
+  characterObj.class = className;
+  characterObj.ability_scores = abilityScores;
+
+  characterObj.EntryId = data.nextEntryId;
+
+  data.nextEntryId++;
+
+  data.entries.unshift(characterObj);
+
+  var $div1 = document.createElement('div');
+  var $div2 = document.createElement('div');
+  var $div3 = document.createElement('div');
+  var $div4 = document.createElement('div');
+  var $div5 = document.createElement('div');
+  var $div6 = document.createElement('div');
+  var $h5Element1 = document.createElement('h5');
+  var $h5Element2 = document.createElement('h5');
+  var $h5Element3 = document.createElement('h5');
+  var $h5Element4 = document.createElement('h5');
+  var $h5Element5 = document.createElement('h5');
+  var $h5Element6 = document.createElement('h5');
+  var $p1 = document.createElement('p');
+  var $p2 = document.createElement('p');
+  var $p3 = document.createElement('p');
+  var $p4 = document.createElement('p');
+  var $p5 = document.createElement('p');
+  var $p6 = document.createElement('p');
+  $h5Element1.textContent = 'STR';
+  $h5Element2.textContent = 'DEX';
+  $h5Element3.textContent = 'CON';
+  $h5Element4.textContent = 'INT';
+  $h5Element5.textContent = 'WIS';
+  $h5Element6.textContent = 'CHA';
+  $p1.textContent = str;
+  $p2.textContent = dex;
+  $p3.textContent = con;
+  $p4.textContent = int;
+  $p5.textContent = wis;
+  $p6.textContent = cha;
+
+  $characterAbilityScore.appendChild($div1);
+  $div1.appendChild($h5Element1);
+  $div1.appendChild($p1);
+  $characterAbilityScore.appendChild($div2);
+  $div2.appendChild($h5Element2);
+  $div2.appendChild($p2);
+  $characterAbilityScore.appendChild($div3);
+  $div3.appendChild($h5Element3);
+  $div3.appendChild($p3);
+  $characterAbilityScore.appendChild($div4);
+  $div4.appendChild($h5Element4);
+  $div4.appendChild($p4);
+  $characterAbilityScore.appendChild($div5);
+  $div5.appendChild($h5Element5);
+  $div5.appendChild($p5);
+  $characterAbilityScore.appendChild($div6);
+  $div6.appendChild($h5Element6);
+  $div6.appendChild($p6);
+
+  var $pRace = document.createElement('p');
+  var $pClass = document.createElement('p');
+  $pRace.textContent = raceName;
+  $pClass.textContent = className;
+
+  $characterRace.appendChild($pRace);
+  $characterClass.appendChild($pClass);
+
+  event.target.reset();
+
+  $characterCreationPage.setAttribute('class', 'hidden');
+  $finalCharacterAdjustments.setAttribute('class', '');
+
+});
+
+$photoUrl.addEventListener('input', function (event) {
+  $placeHolderImg.setAttribute('src', event.target.value);
+  if ($placeHolderImg.getAttribute('src') === '') {
+    $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  }
+});
