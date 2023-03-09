@@ -22,12 +22,26 @@ var $racePicWrapper = document.querySelectorAll('#race .pic-wrapper');
 var $classPicWrapper = document.querySelectorAll('#class .pic-wrapper');
 
 var $submitButton = document.querySelector('#character-creation-page form');
+// var $newCharacterSave = document.querySelector('#final-character-adjustments');
+
+var $gallery = document.querySelector('#gallery');
+var $characterDetails = document.querySelector('#character-details');
+var $characterDetailContent = document.querySelector('#character-details .content-area');
 
 var $raceCheckMark;
 var $classCheckMark;
 
 var $photoUrl = document.querySelector('#final-character-adjustments .photoUrl');
 var $placeHolderImg = document.querySelector('#placeholder-img');
+
+var $galleryLink = document.querySelector('.gallery-link');
+
+$galleryLink.addEventListener('click', function (event) {
+  $homePage.setAttribute('class', 'hidden');
+  $characterCreationPage.setAttribute('class', 'hidden');
+  $finalCharacterAdjustments.setAttribute('class', 'hidden');
+  $gallery.setAttribute('class', '');
+});
 
 $startButton.addEventListener('click', function (event) {
   $homePage.setAttribute('class', 'hidden');
@@ -37,6 +51,8 @@ $startButton.addEventListener('click', function (event) {
 $h1TitleText.addEventListener('click', function (event) {
   $homePage.setAttribute('class', '');
   $characterCreationPage.setAttribute('class', 'hidden');
+  $finalCharacterAdjustments.setAttribute('class', 'hidden');
+  $gallery.setAttribute('class', 'hidden');
 });
 
 $selectARace.addEventListener('click', function (event) {
@@ -154,10 +170,6 @@ function ajaxRequestRace(raceName) {
   xhr.open('GET', 'https://api.open5e.com/races/');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response.results);
-    // console.log(xhr.response.results[0].name);
-    // console.log($raceH5);
-    // console.log($raceH5[0]);
     for (var i = 0; i < xhr.response.results.length; i++) {
       if (xhr.response.results[i].name === raceName.getAttribute('id') && $raceCharacteristics[i].childNodes.length <= 1) {
         var $age = document.createElement('h5');
@@ -182,13 +194,7 @@ function ajaxRequestRace(raceName) {
         $asiInfo.textContent = xhr.response.results[i].asi_desc;
         var $newDiv1 = document.createElement('div');
         var $newDiv2 = document.createElement('div');
-        // var $traits = document.createElement('h5');
-        // $traits.textContent = 'Traits:';
-        // var $traitsInfo = document.createElement('p');
-        // $traitsInfo.textContent = xhr.response.results[i].traits;
         for (var j = 0; j < $raceCharacteristics.length; j++) {
-          // console.log($raceCharacteristics[0].id);
-          // console.log(xhr.response.results[0].slug);
           if (xhr.response.results[i].slug === $raceCharacteristics[j].id) {
             $raceCharacteristics[j].appendChild($newDiv1);
             $raceCharacteristics[j].appendChild($newDiv2);
@@ -202,8 +208,6 @@ function ajaxRequestRace(raceName) {
             $newDiv2.appendChild($alignmentInfo);
             $newDiv2.appendChild($asi);
             $newDiv2.appendChild($asiInfo);
-            // $raceCharacteristics.appendChild($traits);
-            // $raceCharacteristics.appendChild($traitsInfo);
           }
         }
       }
@@ -320,8 +324,6 @@ $submitButton.addEventListener('submit', function (event) {
 
   characterObj.EntryId = data.nextEntryId;
 
-  data.nextEntryId++;
-
   data.entries.unshift(characterObj);
 
   var $div1 = document.createElement('div');
@@ -389,9 +391,254 @@ $submitButton.addEventListener('submit', function (event) {
 
 });
 
+function toggleNoEntries() {
+  var $noEntryText = document.querySelectorAll('.no-entry-text');
+  for (var noEntryTexts of $noEntryText) {
+    if (data.entries.length > 0) {
+      noEntryTexts.classList.add('hidden');
+    } else {
+      noEntryTexts.classList.remove('hidden');
+    }
+  }
+}
+
 $photoUrl.addEventListener('input', function (event) {
   $placeHolderImg.setAttribute('src', event.target.value);
   if ($placeHolderImg.getAttribute('src') === '') {
     $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   }
 });
+
+$finalCharacterAdjustments.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  var charName = event.target.elements[0].value;
+  var charImg = event.target.elements[1].value;
+  var charDesc = event.target.elements[2].value;
+
+  data.entries[0].character_name = charName;
+  data.entries[0].character_img = charImg;
+  data.entries[0].character_description = charDesc;
+
+  data.nextEntryId++;
+
+  event.target.reset();
+
+  newCharacterImgGallery(data.entries[0]);
+
+  newCharacterImgHomePage(data.entries[0]);
+
+  if (data.entries.length > 0) {
+    toggleNoEntries();
+  }
+
+  $finalCharacterAdjustments.setAttribute('class', 'hidden');
+  $gallery.setAttribute('class', '');
+
+});
+
+var $picSectionGallery = document.querySelector('#gallery .pic-section');
+function newCharacterImgGallery(entry) {
+  var $picWrapperDiv = document.createElement('div');
+  $picWrapperDiv.setAttribute('class', 'pic-wrapper');
+  $picWrapperDiv.setAttribute('data-entry-id', entry.EntryId);
+  var $characterH5 = document.createElement('h5');
+  $characterH5.textContent = entry.character_name;
+  $picWrapperDiv.appendChild($characterH5);
+  var $picContainerDiv = document.createElement('div');
+  $picContainerDiv.setAttribute('class', 'pic-container');
+  $picWrapperDiv.appendChild($picContainerDiv);
+  var $characterImage = document.createElement('img');
+  $characterImage.setAttribute('src', entry.character_img);
+  $picContainerDiv.appendChild($characterImage);
+
+  return $picWrapperDiv;
+}
+
+var $picSectionHomePage = document.querySelector('#home-page .pic-section');
+function newCharacterImgHomePage(entry) {
+  var $picWrapperDivHP = document.createElement('div');
+  $picWrapperDivHP.setAttribute('class', 'pic-wrapper');
+  $picWrapperDivHP.setAttribute('data-entry-id', entry.EntryId);
+  var $characterH5HP = document.createElement('h5');
+  $characterH5HP.textContent = entry.character_name;
+  $picWrapperDivHP.appendChild($characterH5HP);
+  var $picContainerDivHP = document.createElement('div');
+  $picContainerDivHP.setAttribute('class', 'pic-container');
+  $picWrapperDivHP.appendChild($picContainerDivHP);
+  var $characterImageHP = document.createElement('img');
+  $characterImageHP.setAttribute('src', entry.character_img);
+  $picContainerDivHP.appendChild($characterImageHP);
+
+  return $picWrapperDivHP;
+}
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    $picSectionGallery.appendChild(newCharacterImgGallery(data.entries[i]));
+    $picSectionHomePage.appendChild(newCharacterImgHomePage(data.entries[i]));
+  }
+
+  // data.editing = null;
+
+  if (data.entries.length > 0) {
+    toggleNoEntries();
+  }
+});
+
+var $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
+var $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
+
+function renderEntry(entry) {
+
+  var $characterContentDiv = document.createElement('div');
+  $characterContentDiv.setAttribute('class', 'character-content');
+  // $characterContentDiv.setAttribute('data-entry-id', entry.EntryId);
+
+  var $centeredRowDiv = document.createElement('div');
+  $centeredRowDiv.setAttribute('class', 'centered-row');
+  $characterContentDiv.appendChild($centeredRowDiv);
+
+  var $characterNameH2 = document.createElement('h2');
+  $characterNameH2.textContent = entry.character_name;
+  $centeredRowDiv.appendChild($characterNameH2);
+  var $characterImg = document.createElement('img');
+  $characterImg.setAttribute('src', entry.character_img);
+  $centeredRowDiv.appendChild($characterImg);
+  var $characterImgUrl = document.createElement('p');
+  $characterImgUrl.textContent = entry.character_img;
+  $centeredRowDiv.appendChild($characterImgUrl);
+
+  var $characterCharacteristicsDiv = document.createElement('div');
+  $characterContentDiv.appendChild($characterCharacteristicsDiv);
+
+  var $abilityScoreMainDiv = document.createElement('div');
+  $characterCharacteristicsDiv.appendChild($abilityScoreMainDiv);
+
+  var $abilityScoreH4 = document.createElement('h4');
+  $abilityScoreH4.textContent = 'Ability Score:';
+  $abilityScoreMainDiv.appendChild($abilityScoreH4);
+  var $abilityScoreDirectParentDiv = document.createElement('div');
+  $abilityScoreDirectParentDiv.setAttribute('class', 'character-ability-score');
+  $abilityScoreDirectParentDiv.setAttribute('class', 'row');
+
+  var $div1 = document.createElement('div');
+  var $div2 = document.createElement('div');
+  var $div3 = document.createElement('div');
+  var $div4 = document.createElement('div');
+  var $div5 = document.createElement('div');
+  var $div6 = document.createElement('div');
+  var $h5Element1 = document.createElement('h5');
+  var $h5Element2 = document.createElement('h5');
+  var $h5Element3 = document.createElement('h5');
+  var $h5Element4 = document.createElement('h5');
+  var $h5Element5 = document.createElement('h5');
+  var $h5Element6 = document.createElement('h5');
+  var $p1 = document.createElement('p');
+  var $p2 = document.createElement('p');
+  var $p3 = document.createElement('p');
+  var $p4 = document.createElement('p');
+  var $p5 = document.createElement('p');
+  var $p6 = document.createElement('p');
+  $h5Element1.textContent = 'STR';
+  $h5Element2.textContent = 'DEX';
+  $h5Element3.textContent = 'CON';
+  $h5Element4.textContent = 'INT';
+  $h5Element5.textContent = 'WIS';
+  $h5Element6.textContent = 'CHA';
+  $p1.textContent = entry.ability_scores.STR;
+  $p2.textContent = entry.ability_scores.DEX;
+  $p3.textContent = entry.ability_scores.CON;
+  $p4.textContent = entry.ability_scores.INT;
+  $p5.textContent = entry.ability_scores.WIS;
+  $p6.textContent = entry.ability_scores.CHA;
+  $abilityScoreDirectParentDiv.appendChild($div1);
+  $div1.appendChild($h5Element1);
+  $div1.appendChild($p1);
+  $abilityScoreDirectParentDiv.appendChild($div2);
+  $div2.appendChild($h5Element2);
+  $div2.appendChild($p2);
+  $abilityScoreDirectParentDiv.appendChild($div3);
+  $div3.appendChild($h5Element3);
+  $div3.appendChild($p3);
+  $abilityScoreDirectParentDiv.appendChild($div4);
+  $div4.appendChild($h5Element4);
+  $div4.appendChild($p4);
+  $abilityScoreDirectParentDiv.appendChild($div5);
+  $div5.appendChild($h5Element5);
+  $div5.appendChild($p5);
+  $abilityScoreDirectParentDiv.appendChild($div6);
+  $div6.appendChild($h5Element6);
+  $div6.appendChild($p6);
+
+  var $raceMainDiv = document.createElement('div');
+  $raceMainDiv.setAttribute('class', 'character-info');
+  $characterCharacteristicsDiv.appendChild($raceMainDiv);
+  var $raceH4 = document.createElement('h4');
+  $raceH4.textContent = 'Race:';
+  $raceMainDiv.appendChild($raceH4);
+  var $raceNameDiv = document.createElement('div');
+  $raceMainDiv.appendChild($raceNameDiv);
+  var $pRace = document.createElement('p');
+  $pRace.textContent = entry.name;
+  $raceNameDiv.appendChild($pRace);
+
+  var $classMainDiv = document.createElement('div');
+  $classMainDiv.setAttribute('class', 'character-info');
+  $characterCharacteristicsDiv.appendChild($classMainDiv);
+  var $classH4 = document.createElement('h4');
+  $classH4.textContent = 'Class';
+  $classMainDiv.appendChild($classH4);
+  var $classNameDiv = document.createElement('div');
+  $classMainDiv.appendChild($classNameDiv);
+  var $pClass = document.createElement('p');
+  $pClass.textContent = entry.class;
+  $classNameDiv.appendChild($pClass);
+
+  var $characterDescriptionDiv = document.createElement('div');
+  $characterDescriptionDiv.setAttribute('class', 'centered-row');
+  $characterCharacteristicsDiv.appendChild($characterDescriptionDiv);
+  var $descriptionH4 = document.createElement('h4');
+  $descriptionH4.textContent = 'Description:';
+  $characterDescriptionDiv.appendChild($descriptionH4);
+  var $descriptionText = document.createElement('p');
+  $descriptionText.textContent = entry.character_description;
+
+  var $editButton = document.createElement('button');
+  $editButton.setAttribute('class', 'edit-button');
+  $characterContentDiv.appendChild($editButton);
+
+  return $characterContentDiv;
+}
+
+$galleryPicWrapper.forEach(img => {
+  img.addEventListener('click', function (event) {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].EntryId === event.target.getAttribute('data-entry-id')) {
+        $gallery.setAttribute('class', 'hidden');
+        $characterDetails.setAttribute('class', '');
+        $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+      }
+    }
+  });
+});
+
+$homepagePicWrapper.forEach(img => {
+  img.addEventListener('click', function (event) {
+    for (var i = 0; i < data.entries.length; i++) {
+      // console.log(data.entries[i].EntryId);
+      // console.log(event.target.getAttribute('data-entry-id'));
+      // if (data.entries[i].EntryId === event.target.getAttribute('data-entry-id')) {
+      //   $homePage.setAttribute('class', 'hidden');
+      //   $characterDetails.setAttribute('class', '');
+      //   $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+      // }
+    }
+  });
+});
+
+// document.addEventListener('click', function (event) {
+//   for (var i = 0; i < data.entries.length; i++) {
+//     $ulElement.appendChild(renderEntry(data.entries[i]));
+//   }
+// });

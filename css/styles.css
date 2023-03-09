@@ -25,6 +25,11 @@ p {
   font-family: Roboto, sans-serif;
 }
 
+.character-info p {
+  margin-top: 0;
+  margin-left: 1rem;
+}
+
 button:hover {
   cursor: pointer;
 }
@@ -153,7 +158,8 @@ button:hover {
 }
 
 #submit-button,
-#character-submit-button {
+#character-save-button,
+.edit-button {
   border: none;
   background-color: #d94a37;
   color: white;
@@ -162,6 +168,10 @@ button:hover {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   margin: 2rem auto;
+}
+
+#character-save-button {
+  margin-bottom: 0;
 }
 
 #character-form {
@@ -186,6 +196,11 @@ img {
 }
 
 .pic-section h4 {
+  font-family: Roboto, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.pic-section h5 {
   font-family: Roboto, sans-serif;
   margin-bottom: 0.5rem;
 }
@@ -267,6 +282,15 @@ img {
 
 #ability-score-input {
   margin: 2rem auto;
+}
+
+.gallery-content p {
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+}
+
+.character-ability-score div p {
+  margin-top: 0.5rem;
 }
 
 #ability-score-input p {
@@ -367,30 +391,16 @@ input::-webkit-inner-spin-button {
   margin-bottom: 2rem;
 }
 
-#character-race p {
-  margin-top: 0;
-  margin-left: 1rem;
-}
-
-#character-class p {
-  margin-top: 0;
-  margin-left: 1rem;
-}
-
-#character-ability-score div {
+.character-ability-score div {
   flex-basis: calc(100%/6);
   text-align: center;
 }
 
-#character-ability-score div h5 {
+.character-ability-score div h5 {
   margin: 0;
 }
 
-#character-ability-score div p {
-  margin-top: 0.5rem;
-}
-
-#final-character-adjustments textarea {
+.character-content textarea {
   width: 20rem;
   height: 7rem;
   margin: 0 auto 1rem;
@@ -399,6 +409,26 @@ input::-webkit-inner-spin-button {
   border-radius: 0.25rem;
   padding: 1rem;
   resize: none;
+}
+
+.gallery-content {
+  padding: 2rem;
+}
+
+.gallery-content h2 {
+  text-align: center;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+#gallery h5 {
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 @media screen and (min-width: 850px) {
@@ -467,6 +497,10 @@ input::-webkit-inner-spin-button {
     padding: 2rem;
   }
 
+  .character-content > div {
+    padding: 4rem;
+  }
+
   .pic-wrapper .race-characteristics div {
     display: flex;
     flex-direction: column;
@@ -492,5 +526,25 @@ input::-webkit-inner-spin-button {
     height: 4rem;
     margin: 0.35rem 0.75rem 1rem;
     font-size: 2rem;
+  }
+
+  .character-content {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .character-content img {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .gallery-content .pic-section {
+    margin: auto;
+    max-width: 750px;
+  }
+
+  #gallery h5 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
   }
 }
