@@ -50,7 +50,11 @@
           <div class="column-full intro-bottom">
             <h3>Gallery</h3>
             <div class="line"></div>
-            <p>The gallery is empty! Please create a new character</p>
+            <div class="pic-section">
+              <div class="no-entry-text">
+                <p>The gallery is empty! Please create a new character</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -62,7 +66,6 @@
             <p>Please choose from the selections below to create your character!</p>
           </div>
           <form id="character-form" class="centered-row">
-            <!-- h2 subject to change -->
             <div id="race">
               <h2 id="select-a-race" class="character-h2">Select a Race:<i id="race-caret" class="fa-solid fa-caret-left"></i></h2>
               <div id="race-icons" class="pic-section hidden">
@@ -612,12 +615,12 @@
                   <p>There are brief descriptions of each category listed as well.</p>
                 </div>
                 <div id="ability-score-input" class="pic-section">
-                  <p>STR<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>DEX<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>CON<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>INT<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>WIS<br><input type="number" min="0" placeholder="-" required></p>
-                  <p>CHA<br><input type="number" min="0" placeholder="-" required></p>
+                  <p>STR<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>DEX<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>CON<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>INT<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>WIS<br><input type="number" min="0" max="30" placeholder="-" required></p>
+                  <p>CHA<br><input type="number" min="0" max="30" placeholder="-" required></p>
                 </div>
                 <div id="ability-score-info">
                   <div class="ability-info">
@@ -638,7 +641,7 @@
                   </div>
                   <div class="ability-info">
                     <h4>Wisdom (WIS)</h4>
-                    <p>Strength measures bodiWisdom reflects how attuned you are to the world around you and represents perceptiveness and intuition.</p>
+                    <p>Wisdom reflects how attuned you are to the world around you and represents perceptiveness and intuition.</p>
                   </div>
                   <div class="ability-info">
                     <h4>Charisma (CHA)</h4>
@@ -650,6 +653,60 @@
             </div>
             <button id="submit-button" type="submit">SUBMIT</button>
           </form>
+        </div>
+      </section>
+      <section id="final-character-adjustments" class="hidden">
+        <div class="content-area">
+          <form>
+            <div class="character-content">
+              <div class="centered-row">
+                <input type="text" placeholder="Enter your character name" required>
+                <img id="placeholder-img" src="images/placeholder-image-square.jpg" alt="placeholder image">
+                <input class="photoUrl" type="text" placeholder="Photo URL">
+              </div>
+              <div>
+                <div id="AS">
+                  <h4>Ability Score:</h4>
+                  <div id="character-ability-score" class="character-ability-score row">
+
+                  </div>
+                </div>
+                <div class="character-info">
+                  <h4>Race:</h4>
+                  <div id="character-race"></div>
+                </div>
+                <div class="character-info">
+                  <h4>Class:</h4>
+                  <div id="character-class"></div>
+                </div>
+                <div class="centered-row">
+                  <h4>Description:</h4>
+                  <textarea placeholder="Write a description of your character"></textarea>
+                </div>
+              </div>
+            </div>
+            <button class="centered-row" id="character-save-button" type="submit">SAVE</button>
+          </form>
+        </div>
+      </section>
+      <section id="gallery" class="hidden">
+        <div class="content-area">
+          <div class="gallery-content" >
+            <div>
+              <h2>Hall of Heroes<br>Gallery</h2>
+              <div class="line"></div>
+            </div>
+            <div class="pic-section">
+              <div class="no-entry-text">
+                <p>The gallery is empty! Please create a new character</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="character-details" class="hidden">
+        <div class="content-area">
+
         </div>
       </section>
     </div>

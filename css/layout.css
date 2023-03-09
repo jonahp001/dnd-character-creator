@@ -48,6 +48,10 @@
   border-radius: 1rem;
 }
 
+#character-details .character-content {
+  padding: 2rem;
+}
+
 .pic-section,
 #ability-score-content {
   display: flex;
@@ -55,8 +59,13 @@
   align-items: center;
 }
 
+.no-entry-text {
+  margin: 2rem auto;
+}
+
 .pic-wrapper {
   flex-basis: calc(100%/3);
+  margin: auto;
 }
 
 .pic-container {
@@ -75,6 +84,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.half-picture-icons {
+  flex-basis: 50%;
+}
+
+.full-picture-icon {
+  flex-basis: 100%;
 }
 
 @media screen and (min-width: 850px) {
