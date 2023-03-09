@@ -39,7 +39,9 @@ var $galleryLink = document.querySelector('.gallery-link');
 var $characterContentDiv;
 
 $h1TitleText.addEventListener('click', function (event) {
-  $characterDetailContent.removeChild($characterContentDiv);
+  if ($characterDetailContent.childNodes.length > 1) {
+    $characterDetailContent.removeChild($characterContentDiv);
+  }
   $homePage.setAttribute('class', '');
   $characterCreationPage.setAttribute('class', 'hidden');
   $finalCharacterAdjustments.setAttribute('class', 'hidden');
@@ -48,7 +50,9 @@ $h1TitleText.addEventListener('click', function (event) {
 });
 
 $galleryLink.addEventListener('click', function (event) {
-  $characterDetailContent.removeChild($characterContentDiv);
+  if ($characterDetailContent.childNodes.length > 1) {
+    $characterDetailContent.removeChild($characterContentDiv);
+  }
   $gallery.setAttribute('class', '');
   $homePage.setAttribute('class', 'hidden');
   $characterCreationPage.setAttribute('class', 'hidden');
