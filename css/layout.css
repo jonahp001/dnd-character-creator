@@ -48,6 +48,10 @@
   border-radius: 1rem;
 }
 
+#character-details .character-content {
+  padding: 2rem;
+}
+
 .pic-section,
 #ability-score-content {
   display: flex;

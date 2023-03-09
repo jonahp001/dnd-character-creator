@@ -36,23 +36,30 @@ var $placeHolderImg = document.querySelector('#placeholder-img');
 
 var $galleryLink = document.querySelector('.gallery-link');
 
+var $characterContentDiv;
+
+$h1TitleText.addEventListener('click', function (event) {
+  $characterDetailContent.removeChild($characterContentDiv);
+  $homePage.setAttribute('class', '');
+  $characterCreationPage.setAttribute('class', 'hidden');
+  $finalCharacterAdjustments.setAttribute('class', 'hidden');
+  $gallery.setAttribute('class', 'hidden');
+  $characterDetails.setAttribute('class', 'hidden');
+});
+
 $galleryLink.addEventListener('click', function (event) {
+  $characterDetailContent.removeChild($characterContentDiv);
+  $gallery.setAttribute('class', '');
   $homePage.setAttribute('class', 'hidden');
   $characterCreationPage.setAttribute('class', 'hidden');
   $finalCharacterAdjustments.setAttribute('class', 'hidden');
-  $gallery.setAttribute('class', '');
+  $characterDetails.setAttribute('class', 'hidden');
+  $characterDetails.setAttribute('class', 'hidden');
 });
 
 $startButton.addEventListener('click', function (event) {
   $homePage.setAttribute('class', 'hidden');
   $characterCreationPage.setAttribute('class', '');
-});
-
-$h1TitleText.addEventListener('click', function (event) {
-  $homePage.setAttribute('class', '');
-  $characterCreationPage.setAttribute('class', 'hidden');
-  $finalCharacterAdjustments.setAttribute('class', 'hidden');
-  $gallery.setAttribute('class', 'hidden');
 });
 
 $selectARace.addEventListener('click', function (event) {
@@ -424,9 +431,8 @@ $finalCharacterAdjustments.addEventListener('submit', function (event) {
 
   event.target.reset();
 
-  newCharacterImgGallery(data.entries[0]);
-
-  newCharacterImgHomePage(data.entries[0]);
+  $picSectionGallery.prepend(newCharacterImgGallery(data.entries[0]));
+  $picSectionHomePage.prepend(newCharacterImgHomePage(data.entries[0]));
 
   if (data.entries.length > 0) {
     toggleNoEntries();
@@ -434,7 +440,6 @@ $finalCharacterAdjustments.addEventListener('submit', function (event) {
 
   $finalCharacterAdjustments.setAttribute('class', 'hidden');
   $gallery.setAttribute('class', '');
-
 });
 
 var $picSectionGallery = document.querySelector('#gallery .pic-section');
@@ -450,6 +455,7 @@ function newCharacterImgGallery(entry) {
   $picWrapperDiv.appendChild($picContainerDiv);
   var $characterImage = document.createElement('img');
   $characterImage.setAttribute('src', entry.character_img);
+  $characterImage.setAttribute('data-entry-id', entry.EntryId);
   $picContainerDiv.appendChild($characterImage);
 
   return $picWrapperDiv;
@@ -468,6 +474,7 @@ function newCharacterImgHomePage(entry) {
   $picWrapperDivHP.appendChild($picContainerDivHP);
   var $characterImageHP = document.createElement('img');
   $characterImageHP.setAttribute('src', entry.character_img);
+  $characterImageHP.setAttribute('data-entry-id', entry.EntryId);
   $picContainerDivHP.appendChild($characterImageHP);
 
   return $picWrapperDivHP;
@@ -475,8 +482,8 @@ function newCharacterImgHomePage(entry) {
 
 document.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
-    $picSectionGallery.appendChild(newCharacterImgGallery(data.entries[i]));
-    $picSectionHomePage.appendChild(newCharacterImgHomePage(data.entries[i]));
+    $picSectionGallery.prepend(newCharacterImgGallery(data.entries[i]));
+    $picSectionHomePage.prepend(newCharacterImgHomePage(data.entries[i]));
   }
 
   // data.editing = null;
@@ -484,14 +491,45 @@ document.addEventListener('DOMContentLoaded', function (event) {
   if (data.entries.length > 0) {
     toggleNoEntries();
   }
-});
 
-var $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
-var $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
+  var $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
+
+  $galleryPicWrapper.forEach(img => {
+    img.addEventListener('click', function (event) {
+      for (var i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id') && $characterDetails.childNodes[1].childNodes.length < 2) {
+          $gallery.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+          $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+        } else if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id')) {
+          $gallery.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+        }
+      }
+    });
+  });
+
+  var $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
+
+  $homepagePicWrapper.forEach(img => {
+    img.addEventListener('click', function (event) {
+      for (var i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id') && $characterDetails.childNodes[1].childNodes.length < 2) {
+          $homePage.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+          $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+        } else if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id')) {
+          $homePage.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+        }
+      }
+    });
+  });
+});
 
 function renderEntry(entry) {
 
-  var $characterContentDiv = document.createElement('div');
+  $characterContentDiv = document.createElement('div');
   $characterContentDiv.setAttribute('class', 'character-content');
   // $characterContentDiv.setAttribute('data-entry-id', entry.EntryId);
 
@@ -519,8 +557,9 @@ function renderEntry(entry) {
   $abilityScoreH4.textContent = 'Ability Score:';
   $abilityScoreMainDiv.appendChild($abilityScoreH4);
   var $abilityScoreDirectParentDiv = document.createElement('div');
-  $abilityScoreDirectParentDiv.setAttribute('class', 'character-ability-score');
-  $abilityScoreDirectParentDiv.setAttribute('class', 'row');
+  $abilityScoreDirectParentDiv.setAttribute('class', 'character-ability-score row');
+  // $abilityScoreDirectParentDiv.setAttribute('class', 'row');
+  $abilityScoreMainDiv.appendChild($abilityScoreDirectParentDiv);
 
   var $div1 = document.createElement('div');
   var $div2 = document.createElement('div');
@@ -580,7 +619,7 @@ function renderEntry(entry) {
   var $raceNameDiv = document.createElement('div');
   $raceMainDiv.appendChild($raceNameDiv);
   var $pRace = document.createElement('p');
-  $pRace.textContent = entry.name;
+  $pRace.textContent = entry.race;
   $raceNameDiv.appendChild($pRace);
 
   var $classMainDiv = document.createElement('div');
@@ -603,39 +642,45 @@ function renderEntry(entry) {
   $characterDescriptionDiv.appendChild($descriptionH4);
   var $descriptionText = document.createElement('p');
   $descriptionText.textContent = entry.character_description;
+  $characterDescriptionDiv.appendChild($descriptionText);
 
   var $editButton = document.createElement('button');
   $editButton.setAttribute('class', 'edit-button');
+  $editButton.textContent = 'EDIT';
   $characterContentDiv.appendChild($editButton);
 
   return $characterContentDiv;
 }
 
-$galleryPicWrapper.forEach(img => {
-  img.addEventListener('click', function (event) {
-    for (var i = 0; i < data.entries.length; i++) {
-      if (data.entries[i].EntryId === event.target.getAttribute('data-entry-id')) {
-        $gallery.setAttribute('class', 'hidden');
-        $characterDetails.setAttribute('class', '');
-        $characterDetailContent.appendChild(renderEntry(data.entries[i]));
-      }
-    }
-  });
-});
+// var $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
+// var $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
+// i suspect this doesnt work because this dom element doesnt CURRENTLY exist and only exists when we make a new character.
 
-$homepagePicWrapper.forEach(img => {
-  img.addEventListener('click', function (event) {
-    for (var i = 0; i < data.entries.length; i++) {
-      // console.log(data.entries[i].EntryId);
-      // console.log(event.target.getAttribute('data-entry-id'));
-      // if (data.entries[i].EntryId === event.target.getAttribute('data-entry-id')) {
-      //   $homePage.setAttribute('class', 'hidden');
-      //   $characterDetails.setAttribute('class', '');
-      //   $characterDetailContent.appendChild(renderEntry(data.entries[i]));
-      // }
-    }
-  });
-});
+// $galleryPicWrapper.forEach(img => {
+//   img.addEventListener('click', function (event) {
+//     for (var i = 0; i < data.entries.length; i++) {
+//       if (data.entries[i].EntryId === event.target.getAttribute('data-entry-id')) {
+//         $gallery.setAttribute('class', 'hidden');
+//         $characterDetails.setAttribute('class', '');
+//         $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+//       }
+//     }
+//   });
+// });
+
+// $homepagePicWrapper.forEach(img => {
+//   img.addEventListener('click', function (event) {
+//     for (var i = 0; i < data.entries.length; i++) {
+//       console.log(data.entries[i].EntryId);
+//       console.log(event.target.getAttribute('data-entry-id'));
+//       // if (data.entries[i].EntryId === event.target.getAttribute('data-entry-id')) {
+//       //   $homePage.setAttribute('class', 'hidden');
+//       //   $characterDetails.setAttribute('class', '');
+//       //   $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+//       // }
+//     }
+//   });
+// });
 
 // document.addEventListener('click', function (event) {
 //   for (var i = 0; i < data.entries.length; i++) {

@@ -201,7 +201,10 @@ img {
 }
 
 .pic-section h5 {
+  text-align: center;
   font-family: Roboto, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
@@ -344,11 +347,13 @@ input::-webkit-inner-spin-button {
   margin-top: 0.35rem;
 }
 
-#final-character-adjustments {
+#final-character-adjustments,
+#character-details {
   font-family: Roboto, sans-serif;
 }
 
-#final-character-adjustments h4 {
+#final-character-adjustments h4,
+#character-details h4 {
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -362,7 +367,8 @@ input::-webkit-inner-spin-button {
   padding: 2rem;
 }
 
-#final-character-adjustments img {
+#final-character-adjustments img,
+#character-details img {
   width: 8rem;
   height: 8rem;
   margin: 1rem auto;
@@ -423,13 +429,28 @@ input::-webkit-inner-spin-button {
   margin-top: 0.5rem;
 }
 
-#gallery h5 {
+#character-details .centered-row h2 {
+  margin: 0 auto;
   text-align: center;
-  font-family: Roboto, sans-serif;
-  font-size: 0.8rem;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.5rem;
   font-weight: 500;
-  margin-bottom: 0.5rem;
 }
+
+#character-details img {
+  margin: 2rem auto;
+}
+
+#character-details .centered-row p {
+  margin: 0 auto 1rem;
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  word-break: break-all;
+  overflow: scroll;
+}
+
+/* #character-details button {
+} */
 
 @media screen and (min-width: 850px) {
   .intro {
