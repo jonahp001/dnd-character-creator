@@ -41,9 +41,15 @@ var $galleryLink = document.querySelector('.gallery-link');
 var $characterContentMAINDiv;
 var $editCharacterDiv;
 var $editButton;
-var $backButton;
+
 var $saveButton;
 var $deleteButton;
+var $backButton;
+
+var $saveCharacterForm;
+
+var $editCharacterButton;
+// var $deleteCharacterButton;
 
 $h1TitleText.addEventListener('click', function (event) {
   $homePage.setAttribute('class', '');
@@ -448,10 +454,10 @@ $finalCharacterAdjustments.addEventListener('submit', function (event) {
 
   data.nextEntryId++;
 
-  event.target.reset();
-
   $picSectionGallery.prepend(newCharacterImgGallery(data.entries[0]));
   $picSectionHomePage.prepend(newCharacterImgHomePage(data.entries[0]));
+
+  event.target.reset();
 
   if (data.entries.length > 0) {
     toggleNoEntries();
@@ -499,8 +505,6 @@ function newCharacterImgHomePage(entry) {
   return $picWrapperDivHP;
 }
 
-var $editCharacterButton;
-
 document.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
     $picSectionGallery.append(newCharacterImgGallery(data.entries[i]));
@@ -534,15 +538,88 @@ document.addEventListener('DOMContentLoaded', function (event) {
             $characterDetails.setAttribute('class', 'hidden');
             $editCharacter.setAttribute('class', '');
             $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
+            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+              data.editing = data.entries[i];
+            }
           } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
             $characterDetails.setAttribute('class', 'hidden');
             $editCharacter.setAttribute('class', '');
+            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+              data.editing = data.entries[i];
+            }
           }
         }
         $backButton = document.querySelector('.back-button');
         $backButton.addEventListener('click', function (event) {
           $editCharacter.setAttribute('class', 'hidden');
           $characterDetails.setAttribute('class', '');
+        });
+        $saveCharacterForm = document.querySelector('#edit-character form');
+        $saveCharacterForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          var characterObj = {};
+
+          var characterName = event.target[0].value;
+          var characterUrl = event.target[1].value;
+
+          var raceName = event.target[8].value;
+          var className = event.target[9].value;
+          var abilityScores = {};
+
+          var str = event.target.elements[2].value;
+          var dex = event.target.elements[3].value;
+          var con = event.target.elements[4].value;
+          var int = event.target.elements[5].value;
+          var wis = event.target.elements[6].value;
+          var cha = event.target.elements[7].value;
+          abilityScores.STR = str;
+          abilityScores.DEX = dex;
+          abilityScores.CON = con;
+          abilityScores.INT = int;
+          abilityScores.WIS = wis;
+          abilityScores.CHA = cha;
+
+          var charDescription = event.target[10].value;
+
+          characterObj.character_name = characterName;
+          characterObj.character_img = characterUrl;
+          characterObj.race = raceName;
+          characterObj.class = className;
+          characterObj.ability_scores = abilityScores;
+          characterObj.character_description = charDescription;
+
+          if (data.editing !== null) {
+            characterObj.character_name = characterName;
+            characterObj.character_img = characterUrl;
+            characterObj.EntryId = data.editing.EntryId;
+            characterObj.race = raceName;
+            characterObj.class = className;
+            characterObj.ability_scores = abilityScores;
+            characterObj.character_description = charDescription;
+            for (var i = 0; i < data.entries.length; i++) {
+              if (data.entries[i].EntryId === data.editing.EntryId) {
+                data.entries[i] = characterObj;
+                for (var j = 0; j < $homepagePicWrapper.length; j++) {
+                  if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
+                    $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                    $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                    $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                    $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                  }
+                }
+              }
+            }
+            var $updatedEntry = renderEntry(characterObj);
+
+            $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
+
+            data.editing = null;
+          }
+
+          $editCharacter.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+
         });
       });
     });
@@ -569,15 +646,88 @@ document.addEventListener('DOMContentLoaded', function (event) {
             $characterDetails.setAttribute('class', 'hidden');
             $editCharacter.setAttribute('class', '');
             $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
+            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+              data.editing = data.entries[i];
+            }
           } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
             $characterDetails.setAttribute('class', 'hidden');
             $editCharacter.setAttribute('class', '');
+            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+              data.editing = data.entries[i];
+            }
           }
         }
         $backButton = document.querySelector('.back-button');
         $backButton.addEventListener('click', function (event) {
           $editCharacter.setAttribute('class', 'hidden');
           $characterDetails.setAttribute('class', '');
+        });
+        $saveCharacterForm = document.querySelector('#edit-character form');
+        $saveCharacterForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          var characterObj = {};
+
+          var characterName = event.target[0].value;
+          var characterUrl = event.target[1].value;
+
+          var raceName = event.target[8].value;
+          var className = event.target[9].value;
+          var abilityScores = {};
+
+          var str = event.target.elements[2].value;
+          var dex = event.target.elements[3].value;
+          var con = event.target.elements[4].value;
+          var int = event.target.elements[5].value;
+          var wis = event.target.elements[6].value;
+          var cha = event.target.elements[7].value;
+          abilityScores.STR = str;
+          abilityScores.DEX = dex;
+          abilityScores.CON = con;
+          abilityScores.INT = int;
+          abilityScores.WIS = wis;
+          abilityScores.CHA = cha;
+
+          var charDescription = event.target[10].value;
+
+          characterObj.character_name = characterName;
+          characterObj.character_img = characterUrl;
+          characterObj.race = raceName;
+          characterObj.class = className;
+          characterObj.ability_scores = abilityScores;
+          characterObj.character_description = charDescription;
+
+          if (data.editing !== null) {
+            characterObj.character_name = characterName;
+            characterObj.character_img = characterUrl;
+            characterObj.EntryId = data.editing.EntryId;
+            characterObj.race = raceName;
+            characterObj.class = className;
+            characterObj.ability_scores = abilityScores;
+            characterObj.character_description = charDescription;
+            for (var i = 0; i < data.entries.length; i++) {
+              if (data.entries[i].EntryId === data.editing.EntryId) {
+                data.entries[i] = characterObj;
+                for (var j = 0; j < $homepagePicWrapper.length; j++) {
+                  if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
+                    $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                    $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                    $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                    $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                  }
+                }
+              }
+            }
+            var $updatedEntry = renderEntry(characterObj);
+
+            $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
+
+            data.editing = null;
+          }
+
+          $editCharacter.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+
         });
       });
     });
@@ -588,6 +738,12 @@ document.addEventListener('DOMContentLoaded', function (event) {
 function renderEntry(entry) {
   $characterContentMAINDiv = document.createElement('div');
   $characterContentMAINDiv.setAttribute('data-entry-id', entry.EntryId);
+
+  $editButton = document.createElement('button');
+  $editButton.setAttribute('class', 'edit-button centered-row');
+  // $editButton.setAttribute('type', 'submit');
+  $editButton.textContent = 'EDIT';
+  $characterContentMAINDiv.appendChild($editButton);
 
   var $characterContentDiv = document.createElement('div');
   $characterContentDiv.setAttribute('class', 'character-content');
@@ -704,12 +860,6 @@ function renderEntry(entry) {
   $descriptionText.textContent = entry.character_description;
   $characterDescriptionDiv.appendChild($descriptionText);
 
-  $editButton = document.createElement('button');
-  $editButton.setAttribute('class', 'edit-button centered-row');
-  // $editButton.setAttribute('type', 'submit');
-  $editButton.textContent = 'EDIT';
-  $characterContentMAINDiv.appendChild($editButton);
-
   return $characterContentMAINDiv;
 }
 
@@ -717,9 +867,33 @@ function renderEntryForEdit(entry) {
   $editCharacterDiv = document.createElement('div');
   $editCharacterDiv.setAttribute('data-entry-id', entry.EntryId);
 
+  var $buttonDiv = document.createElement('div');
+  $buttonDiv.setAttribute('class', 'flex');
+  $editCharacterDiv.appendChild($buttonDiv);
+
+  var $backButtonDiv = document.createElement('div');
+  $backButtonDiv.setAttribute('class', 'pic-wrapper flex');
+  $backButton = document.createElement('button');
+  $backButton.setAttribute('class', 'back-button edit-button');
+  $backButton.textContent = 'BACK';
+  $backButtonDiv.appendChild($backButton);
+  $buttonDiv.appendChild($backButtonDiv);
+
+  var $deleteButtonDiv = document.createElement('div');
+  $deleteButtonDiv.setAttribute('class', 'pic-wrapper flex');
+  $deleteButton = document.createElement('button');
+  $deleteButton.setAttribute('class', 'delete-button edit-button');
+  // $editButton.setAttribute('type', 'submit');
+  $deleteButton.textContent = 'DELETE';
+  $deleteButtonDiv.appendChild($deleteButton);
+  $buttonDiv.appendChild($deleteButtonDiv);
+
+  var $editCharacterForm = document.createElement('form');
+  $editCharacterDiv.appendChild($editCharacterForm);
+
   var $characterContentDiv = document.createElement('div');
   $characterContentDiv.setAttribute('class', 'character-content');
-  $editCharacterDiv.appendChild($characterContentDiv);
+  $editCharacterForm.appendChild($characterContentDiv);
 
   var $centeredRowDiv = document.createElement('div');
   $centeredRowDiv.setAttribute('class', 'centered-row column-half');
@@ -838,36 +1012,14 @@ function renderEntryForEdit(entry) {
   $descriptionText.textContent = entry.character_description;
   $characterDescriptionDiv.appendChild($descriptionText);
 
-  var $buttonDiv = document.createElement('div');
-  $buttonDiv.setAttribute('class', 'flex');
-  $editCharacterDiv.appendChild($buttonDiv);
-
-  var $editButtonDiv = document.createElement('div');
-  $editButtonDiv.setAttribute('class', 'pic-wrapper');
-  $editButton = document.createElement('button');
-  $editButton.setAttribute('class', 'back-button edit-button');
-  // $editButton.setAttribute('type', 'submit');
-  $editButton.textContent = 'BACK';
-  $editButtonDiv.appendChild($editButton);
-  $buttonDiv.appendChild($editButtonDiv);
-
-  var $deleteButtonDiv = document.createElement('div');
-  $deleteButtonDiv.setAttribute('class', 'pic-wrapper');
-  $deleteButton = document.createElement('button');
-  $deleteButton.setAttribute('class', 'delete-button edit-button');
-  // $editButton.setAttribute('type', 'submit');
-  $deleteButton.textContent = 'DELETE';
-  $deleteButtonDiv.appendChild($deleteButton);
-  $buttonDiv.appendChild($deleteButtonDiv);
-
   var $saveButtonDiv = document.createElement('div');
-  $saveButtonDiv.setAttribute('class', 'pic-wrapper');
+  $saveButtonDiv.setAttribute('class', 'pic-wrapper flex');
   $saveButton = document.createElement('button');
   $saveButton.setAttribute('class', 'save-button edit-button');
   $saveButton.setAttribute('type', 'submit');
   $saveButton.textContent = 'SAVE';
   $saveButtonDiv.appendChild($saveButton);
-  $buttonDiv.appendChild($saveButtonDiv);
+  $editCharacterForm.appendChild($saveButtonDiv);
 
   return $editCharacterDiv;
 }
