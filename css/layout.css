@@ -19,6 +19,11 @@
   flex-wrap: wrap;
 }
 
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
 .centered-row {
   display: flex;
   flex-direction: column;
@@ -46,10 +51,6 @@
   margin: 3rem auto;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
-}
-
-#character-details .character-content {
-  padding: 2rem;
 }
 
 .pic-section,
