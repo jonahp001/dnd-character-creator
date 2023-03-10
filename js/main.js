@@ -11,6 +11,12 @@ var $selectAClass = document.querySelector('#select-a-class');
 var $classCaret = document.querySelector('#class-caret');
 var $classIcons = document.querySelector('#class-icons');
 
+var $racePicContainerImg = document.querySelectorAll('#race .pic-container img');
+var $racePicContainer = document.querySelectorAll('#race .pic-container');
+
+var $classPicContainerImg = document.querySelectorAll('#class .pic-container img');
+var $classPicContainer = document.querySelectorAll('#class .pic-container');
+
 var $inputAbilityScores = document.querySelector('#input-ability-scores');
 var $abilityScoreCaret = document.querySelector('#ability-score-caret');
 var $abilityScoreContent = document.querySelector('#ability-score-content');
@@ -38,6 +44,9 @@ var $placeHolderImg = document.querySelector('#placeholder-img');
 
 var $galleryLink = document.querySelector('.gallery-link');
 
+var $galleryPicWrapper;
+var $homepagePicWrapper;
+
 var $characterContentMAINDiv;
 var $editCharacterDiv;
 var $editButton;
@@ -49,7 +58,10 @@ var $backButton;
 var $saveCharacterForm;
 
 var $editCharacterButton;
-// var $deleteCharacterButton;
+var $deleteCharacterButton;
+var $deleteModal = document.querySelector('.delete-modal-bg');
+var $cancelButton = document.querySelector('#cancel-button');
+var $confirmButton = document.querySelector('#confirm-button');
 
 $h1TitleText.addEventListener('click', function (event) {
   $homePage.setAttribute('class', '');
@@ -63,6 +75,32 @@ $h1TitleText.addEventListener('click', function (event) {
     $characterDetailContent.removeChild($characterContentMAINDiv);
   } else if ($characterDetailContent.childNodes.length > 1) {
     $characterDetailContent.removeChild($characterContentMAINDiv);
+  }
+  if ($raceCheckMark !== undefined) {
+    $raceCheckMark.remove();
+  }
+  if ($classCheckMark !== undefined) {
+    $classCheckMark.remove();
+  }
+  $selectARace.setAttribute('class', 'character-h2');
+  $raceCaret.setAttribute('class', 'fa-solid fa-caret-left');
+  $raceIcons.setAttribute('class', 'pic-section hidden');
+  $selectAClass.setAttribute('class', 'character-h2');
+  $classCaret.setAttribute('class', 'fa-solid fa-caret-left');
+  $classIcons.setAttribute('class', 'pic-section hidden');
+  $inputAbilityScores.setAttribute('class', 'character-h2');
+  $abilityScoreCaret.setAttribute('class', 'fa-solid fa-caret-left');
+  $abilityScoreContent.setAttribute('class', 'pic-section hidden');
+
+  for (var i = 0; i < $racePicContainerImg.length; i++) {
+    if ($racePicContainerImg[i].getAttribute('class') === 'selected-modal') {
+      $racePicContainerImg[i].setAttribute('class', '');
+    }
+  }
+  for (var j = 0; j < $classPicContainerImg.length; j++) {
+    if ($classPicContainerImg[j].getAttribute('class') === 'selected-modal') {
+      $classPicContainerImg[j].setAttribute('class', '');
+    }
   }
 });
 
@@ -147,9 +185,6 @@ for (var xMark of $xMarks) {
   });
 }
 
-var $racePicContainerImg = document.querySelectorAll('#race .pic-container img');
-var $racePicContainer = document.querySelectorAll('#race .pic-container');
-
 for (var racePicContainerImg of $racePicContainerImg) {
   racePicContainerImg.addEventListener('click', function (event) {
     for (var i = 0; i < $racePicContainerImg.length; i++) {
@@ -170,9 +205,6 @@ for (var racePicContainerImg of $racePicContainerImg) {
     $raceCheckMark = document.querySelector('#race-check-mark');
   });
 }
-
-var $classPicContainerImg = document.querySelectorAll('#class .pic-container img');
-var $classPicContainer = document.querySelectorAll('#class .pic-container');
 
 for (var classPicContainerImg of $classPicContainerImg) {
   classPicContainerImg.addEventListener('click', function (event) {
@@ -416,6 +448,8 @@ $submitButton.addEventListener('submit', function (event) {
   $characterRace.appendChild($pRace);
   $characterClass.appendChild($pClass);
 
+  $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+
   event.target.reset();
 
   $characterCreationPage.setAttribute('class', 'hidden');
@@ -507,17 +541,21 @@ function newCharacterImgHomePage(entry) {
 
 document.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
+    if (Object.hasOwn(data.entries[i], 'character_img') === false) {
+      data.entries[i].character_img = 'images/placeholder-image-square.jpg';
+    }
+    if (Object.hasOwn(data.entries[i], 'character_name') === false) {
+      data.entries[i].character_name = 'No Name';
+    }
     $picSectionGallery.append(newCharacterImgGallery(data.entries[i]));
     $picSectionHomePage.append(newCharacterImgHomePage(data.entries[i]));
   }
-
-  // data.editing = null;
 
   if (data.entries.length > 0) {
     toggleNoEntries();
   }
 
-  var $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
+  $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
 
   $galleryPicWrapper.forEach(img => {
     img.addEventListener('click', function (event) {
@@ -549,6 +587,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
           }
         }
+        var $editCharacterUrl = document.querySelector('#edit-character #image-url');
+        var $editCharacterImg = document.querySelector('#edit-character img');
+        $editCharacterUrl.addEventListener('input', function (event) {
+          $editCharacterImg.setAttribute('src', event.target.value);
+          if ($editCharacterImg.getAttribute('src') === '') {
+            $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+          }
+        });
         $backButton = document.querySelector('.back-button');
         $backButton.addEventListener('click', function (event) {
           $editCharacter.setAttribute('class', 'hidden');
@@ -621,11 +667,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
           $characterDetails.setAttribute('class', '');
 
         });
+        $deleteCharacterButton = document.querySelector('.delete-button');
+        $deleteCharacterButton.addEventListener('click', function (event) {
+          $deleteModal.setAttribute('class', 'delete-modal-bg');
+        });
       });
     });
   });
 
-  var $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
+  $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
 
   $homepagePicWrapper.forEach(img => {
     img.addEventListener('click', function (event) {
@@ -657,6 +707,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
           }
         }
+        var $editCharacterUrl = document.querySelector('#edit-character #image-url');
+        var $editCharacterImg = document.querySelector('#edit-character img');
+        $editCharacterUrl.addEventListener('input', function (event) {
+          $editCharacterImg.setAttribute('src', event.target.value);
+          if ($editCharacterImg.getAttribute('src') === '') {
+            $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+          }
+        });
         $backButton = document.querySelector('.back-button');
         $backButton.addEventListener('click', function (event) {
           $editCharacter.setAttribute('class', 'hidden');
@@ -729,9 +787,48 @@ document.addEventListener('DOMContentLoaded', function (event) {
           $characterDetails.setAttribute('class', '');
 
         });
+        $deleteCharacterButton = document.querySelector('.delete-button');
+        $deleteCharacterButton.addEventListener('click', function (event) {
+          $deleteModal.setAttribute('class', 'delete-modal-bg');
+        });
       });
     });
   });
+});
+
+$cancelButton.addEventListener('click', function (event) {
+  $deleteModal.setAttribute('class', 'delete-modal-bg hidden');
+});
+
+$confirmButton.addEventListener('click', function (event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].EntryId === data.editing.EntryId) {
+      var dataobjIndex = data.entries.indexOf(data.entries[i]);
+      data.entries.splice(dataobjIndex, 1);
+    }
+  }
+  for (var j = 0; j < $homepagePicWrapper.length; j++) {
+    if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.editing.EntryId.toString()) {
+      $homepagePicWrapper[j].remove();
+      $galleryPicWrapper[j].remove();
+      data.nextEntryId--;
+    }
+  }
+
+  data.editing = null;
+
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
+
+  if ($characterDetailContent.childNodes.length > 1) {
+    $editCharacterContent.removeChild($editCharacterDiv);
+    $characterDetailContent.removeChild($characterContentMAINDiv);
+  }
+
+  $deleteModal.setAttribute('class', 'delete-modal-bg hidden');
+  $editCharacter.setAttribute('class', 'hidden');
+  $gallery.setAttribute('class', '');
 
 });
 
@@ -741,7 +838,6 @@ function renderEntry(entry) {
 
   $editButton = document.createElement('button');
   $editButton.setAttribute('class', 'edit-button centered-row');
-  // $editButton.setAttribute('type', 'submit');
   $editButton.textContent = 'EDIT';
   $characterContentMAINDiv.appendChild($editButton);
 
@@ -883,7 +979,6 @@ function renderEntryForEdit(entry) {
   $deleteButtonDiv.setAttribute('class', 'pic-wrapper flex');
   $deleteButton = document.createElement('button');
   $deleteButton.setAttribute('class', 'delete-button edit-button');
-  // $editButton.setAttribute('type', 'submit');
   $deleteButton.textContent = 'DELETE';
   $deleteButtonDiv.appendChild($deleteButton);
   $buttonDiv.appendChild($deleteButtonDiv);
@@ -903,10 +998,17 @@ function renderEntryForEdit(entry) {
   $characterNameH2.defaultValue = entry.character_name;
   $centeredRowDiv.appendChild($characterNameH2);
   var $characterImg = document.createElement('img');
-  $characterImg.setAttribute('src', entry.character_img);
-  $centeredRowDiv.appendChild($characterImg);
   var $characterImgUrl = document.createElement('input');
-  $characterImgUrl.defaultValue = entry.character_img;
+  if (Object.hasOwn(entry, 'character_img') === false) {
+    $characterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $characterImgUrl.setAttribute('id', 'image-url');
+    $characterImgUrl.defaultValue = 'images/placeholder-image-square.jpg';
+  } else {
+    $characterImgUrl.setAttribute('id', 'image-url');
+    $characterImg.setAttribute('src', entry.character_img);
+    $characterImgUrl.defaultValue = entry.character_img;
+  }
+  $centeredRowDiv.appendChild($characterImg);
   $centeredRowDiv.appendChild($characterImgUrl);
 
   var $characterCharacteristicsDiv = document.createElement('div');
