@@ -475,6 +475,250 @@ $photoUrl.addEventListener('input', function (event) {
   }
 });
 
+function galleryClicker() {
+  $galleryPicWrapper.forEach(img => {
+    img.addEventListener('click', function (event) {
+      for (var i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id') && $characterDetails.childNodes[1].childNodes.length < 2) {
+          $gallery.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+          $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+        } else if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id')) {
+          $gallery.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+        }
+      }
+      $editCharacterButton = document.querySelector('.edit-button');
+      if ($editCharacterButton !== null) {
+        $editCharacterButton.addEventListener('click', function (event) {
+          for (var i = 0; i < data.entries.length; i++) {
+            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id') && $editCharacter.childNodes[1].childNodes.length < 2) {
+              $characterDetails.setAttribute('class', 'hidden');
+              $editCharacter.setAttribute('class', '');
+              $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
+              if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                data.editing = data.entries[i];
+              }
+            } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+              $characterDetails.setAttribute('class', 'hidden');
+              $editCharacter.setAttribute('class', '');
+              if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                data.editing = data.entries[i];
+              }
+            }
+          }
+          var $editCharacterUrl = document.querySelector('#edit-character #image-url');
+          var $editCharacterImg = document.querySelector('#edit-character img');
+          $editCharacterUrl.addEventListener('input', function (event) {
+            $editCharacterImg.setAttribute('src', event.target.value);
+            if ($editCharacterImg.getAttribute('src') === '') {
+              $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+            }
+          });
+          $backButton = document.querySelector('.back-button');
+          $backButton.addEventListener('click', function (event) {
+            $editCharacter.setAttribute('class', 'hidden');
+            $characterDetails.setAttribute('class', '');
+          });
+          $saveCharacterForm = document.querySelector('#edit-character form');
+          $saveCharacterForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var characterObj = {};
+
+            var characterName = event.target[0].value;
+            var characterUrl = event.target[1].value;
+
+            var raceName = event.target[8].value;
+            var className = event.target[9].value;
+            var abilityScores = {};
+
+            var str = event.target.elements[2].value;
+            var dex = event.target.elements[3].value;
+            var con = event.target.elements[4].value;
+            var int = event.target.elements[5].value;
+            var wis = event.target.elements[6].value;
+            var cha = event.target.elements[7].value;
+            abilityScores.STR = str;
+            abilityScores.DEX = dex;
+            abilityScores.CON = con;
+            abilityScores.INT = int;
+            abilityScores.WIS = wis;
+            abilityScores.CHA = cha;
+
+            var charDescription = event.target[10].value;
+
+            characterObj.character_name = characterName;
+            characterObj.character_img = characterUrl;
+            characterObj.race = raceName;
+            characterObj.class = className;
+            characterObj.ability_scores = abilityScores;
+            characterObj.character_description = charDescription;
+
+            if (data.editing !== null) {
+              characterObj.character_name = characterName;
+              characterObj.character_img = characterUrl;
+              characterObj.EntryId = data.editing.EntryId;
+              characterObj.race = raceName;
+              characterObj.class = className;
+              characterObj.ability_scores = abilityScores;
+              characterObj.character_description = charDescription;
+              for (var i = 0; i < data.entries.length; i++) {
+                if (data.entries[i].EntryId === data.editing.EntryId) {
+                  data.entries[i] = characterObj;
+                  for (var j = 0; j < $homepagePicWrapper.length; j++) {
+                    if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
+                      $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                      $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                      $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                      $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                    }
+                  }
+                }
+              }
+              var $updatedEntry = renderEntry(characterObj);
+
+              $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
+
+              data.editing = null;
+            }
+
+            $editCharacter.setAttribute('class', 'hidden');
+            $characterDetails.setAttribute('class', '');
+
+          });
+          $deleteCharacterButton = document.querySelector('.delete-button');
+          $deleteCharacterButton.addEventListener('click', function (event) {
+            $deleteModal.setAttribute('class', 'delete-modal-bg');
+          });
+        });
+      }
+    });
+  });
+}
+
+function homepageClicker() {
+  $homepagePicWrapper.forEach(img => {
+    img.addEventListener('click', function (event) {
+      for (var i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id') && $characterDetails.childNodes[1].childNodes.length < 2) {
+          $homePage.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+          $characterDetailContent.appendChild(renderEntry(data.entries[i]));
+        } else if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id')) {
+          $homePage.setAttribute('class', 'hidden');
+          $characterDetails.setAttribute('class', '');
+        }
+      }
+      $editCharacterButton = document.querySelector('.edit-button');
+      if ($editCharacterButton !== null) {
+        $editCharacterButton.addEventListener('click', function (event) {
+          for (var i = 0; i < data.entries.length; i++) {
+            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id') && $editCharacter.childNodes[1].childNodes.length < 2) {
+              $characterDetails.setAttribute('class', 'hidden');
+              $editCharacter.setAttribute('class', '');
+              $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
+              if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                data.editing = data.entries[i];
+              }
+            } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+              $characterDetails.setAttribute('class', 'hidden');
+              $editCharacter.setAttribute('class', '');
+              if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                data.editing = data.entries[i];
+              }
+            }
+          }
+          var $editCharacterUrl = document.querySelector('#edit-character #image-url');
+          var $editCharacterImg = document.querySelector('#edit-character img');
+          $editCharacterUrl.addEventListener('input', function (event) {
+            $editCharacterImg.setAttribute('src', event.target.value);
+            if ($editCharacterImg.getAttribute('src') === '') {
+              $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+            }
+          });
+          $backButton = document.querySelector('.back-button');
+          $backButton.addEventListener('click', function (event) {
+            $editCharacter.setAttribute('class', 'hidden');
+            $characterDetails.setAttribute('class', '');
+          });
+          $saveCharacterForm = document.querySelector('#edit-character form');
+          $saveCharacterForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var characterObj = {};
+
+            var characterName = event.target[0].value;
+            var characterUrl = event.target[1].value;
+
+            var raceName = event.target[8].value;
+            var className = event.target[9].value;
+            var abilityScores = {};
+
+            var str = event.target.elements[2].value;
+            var dex = event.target.elements[3].value;
+            var con = event.target.elements[4].value;
+            var int = event.target.elements[5].value;
+            var wis = event.target.elements[6].value;
+            var cha = event.target.elements[7].value;
+            abilityScores.STR = str;
+            abilityScores.DEX = dex;
+            abilityScores.CON = con;
+            abilityScores.INT = int;
+            abilityScores.WIS = wis;
+            abilityScores.CHA = cha;
+
+            var charDescription = event.target[10].value;
+
+            characterObj.character_name = characterName;
+            characterObj.character_img = characterUrl;
+            characterObj.race = raceName;
+            characterObj.class = className;
+            characterObj.ability_scores = abilityScores;
+            characterObj.character_description = charDescription;
+
+            if (data.editing !== null) {
+              characterObj.character_name = characterName;
+              characterObj.character_img = characterUrl;
+              characterObj.EntryId = data.editing.EntryId;
+              characterObj.race = raceName;
+              characterObj.class = className;
+              characterObj.ability_scores = abilityScores;
+              characterObj.character_description = charDescription;
+              for (var i = 0; i < data.entries.length; i++) {
+                if (data.entries[i].EntryId === data.editing.EntryId) {
+                  data.entries[i] = characterObj;
+                  for (var j = 0; j < $homepagePicWrapper.length; j++) {
+                    if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
+                      $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                      $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                      $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                      $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                    }
+                  }
+                }
+              }
+              var $updatedEntry = renderEntry(characterObj);
+
+              $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
+
+              data.editing = null;
+            }
+
+            $editCharacter.setAttribute('class', 'hidden');
+            $characterDetails.setAttribute('class', '');
+
+          });
+          $deleteCharacterButton = document.querySelector('.delete-button');
+          $deleteCharacterButton.addEventListener('click', function (event) {
+            $deleteModal.setAttribute('class', 'delete-modal-bg');
+          });
+        });
+      }
+    });
+  });
+}
+
 $finalCharacterAdjustments.addEventListener('submit', function (event) {
   event.preventDefault();
 
@@ -499,6 +743,12 @@ $finalCharacterAdjustments.addEventListener('submit', function (event) {
 
   $finalCharacterAdjustments.setAttribute('class', 'hidden');
   $gallery.setAttribute('class', '');
+
+  $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
+  galleryClicker();
+
+  $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
+  homepageClicker();
 });
 
 var $picSectionGallery = document.querySelector('#gallery .pic-section');
@@ -556,244 +806,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 
   $galleryPicWrapper = document.querySelectorAll('#gallery .pic-wrapper');
-
-  $galleryPicWrapper.forEach(img => {
-    img.addEventListener('click', function (event) {
-      for (var i = 0; i < data.entries.length; i++) {
-        if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id') && $characterDetails.childNodes[1].childNodes.length < 2) {
-          $gallery.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-          $characterDetailContent.appendChild(renderEntry(data.entries[i]));
-        } else if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id')) {
-          $gallery.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-        }
-      }
-      $editCharacterButton = document.querySelector('.edit-button');
-      $editCharacterButton.addEventListener('click', function (event) {
-        for (var i = 0; i < data.entries.length; i++) {
-          if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id') && $editCharacter.childNodes[1].childNodes.length < 2) {
-            $characterDetails.setAttribute('class', 'hidden');
-            $editCharacter.setAttribute('class', '');
-            $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
-            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
-              data.editing = data.entries[i];
-            }
-          } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
-            $characterDetails.setAttribute('class', 'hidden');
-            $editCharacter.setAttribute('class', '');
-            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
-              data.editing = data.entries[i];
-            }
-          }
-        }
-        var $editCharacterUrl = document.querySelector('#edit-character #image-url');
-        var $editCharacterImg = document.querySelector('#edit-character img');
-        $editCharacterUrl.addEventListener('input', function (event) {
-          $editCharacterImg.setAttribute('src', event.target.value);
-          if ($editCharacterImg.getAttribute('src') === '') {
-            $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
-          }
-        });
-        $backButton = document.querySelector('.back-button');
-        $backButton.addEventListener('click', function (event) {
-          $editCharacter.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-        });
-        $saveCharacterForm = document.querySelector('#edit-character form');
-        $saveCharacterForm.addEventListener('submit', function (event) {
-          event.preventDefault();
-
-          var characterObj = {};
-
-          var characterName = event.target[0].value;
-          var characterUrl = event.target[1].value;
-
-          var raceName = event.target[8].value;
-          var className = event.target[9].value;
-          var abilityScores = {};
-
-          var str = event.target.elements[2].value;
-          var dex = event.target.elements[3].value;
-          var con = event.target.elements[4].value;
-          var int = event.target.elements[5].value;
-          var wis = event.target.elements[6].value;
-          var cha = event.target.elements[7].value;
-          abilityScores.STR = str;
-          abilityScores.DEX = dex;
-          abilityScores.CON = con;
-          abilityScores.INT = int;
-          abilityScores.WIS = wis;
-          abilityScores.CHA = cha;
-
-          var charDescription = event.target[10].value;
-
-          characterObj.character_name = characterName;
-          characterObj.character_img = characterUrl;
-          characterObj.race = raceName;
-          characterObj.class = className;
-          characterObj.ability_scores = abilityScores;
-          characterObj.character_description = charDescription;
-
-          if (data.editing !== null) {
-            characterObj.character_name = characterName;
-            characterObj.character_img = characterUrl;
-            characterObj.EntryId = data.editing.EntryId;
-            characterObj.race = raceName;
-            characterObj.class = className;
-            characterObj.ability_scores = abilityScores;
-            characterObj.character_description = charDescription;
-            for (var i = 0; i < data.entries.length; i++) {
-              if (data.entries[i].EntryId === data.editing.EntryId) {
-                data.entries[i] = characterObj;
-                for (var j = 0; j < $homepagePicWrapper.length; j++) {
-                  if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
-                    $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
-                    $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
-                    $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
-                    $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
-                  }
-                }
-              }
-            }
-            var $updatedEntry = renderEntry(characterObj);
-
-            $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
-
-            data.editing = null;
-          }
-
-          $editCharacter.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-
-        });
-        $deleteCharacterButton = document.querySelector('.delete-button');
-        $deleteCharacterButton.addEventListener('click', function (event) {
-          $deleteModal.setAttribute('class', 'delete-modal-bg');
-        });
-      });
-    });
-  });
+  galleryClicker();
 
   $homepagePicWrapper = document.querySelectorAll('#home-page .pic-wrapper');
-
-  $homepagePicWrapper.forEach(img => {
-    img.addEventListener('click', function (event) {
-      for (var i = 0; i < data.entries.length; i++) {
-        if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id') && $characterDetails.childNodes[1].childNodes.length < 2) {
-          $homePage.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-          $characterDetailContent.appendChild(renderEntry(data.entries[i]));
-        } else if (data.entries[i].EntryId.toString() === event.target.getAttribute('data-entry-id')) {
-          $homePage.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-        }
-      }
-      $editCharacterButton = document.querySelector('.edit-button');
-      $editCharacterButton.addEventListener('click', function (event) {
-        for (var i = 0; i < data.entries.length; i++) {
-          if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id') && $editCharacter.childNodes[1].childNodes.length < 2) {
-            $characterDetails.setAttribute('class', 'hidden');
-            $editCharacter.setAttribute('class', '');
-            $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
-            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
-              data.editing = data.entries[i];
-            }
-          } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
-            $characterDetails.setAttribute('class', 'hidden');
-            $editCharacter.setAttribute('class', '');
-            if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
-              data.editing = data.entries[i];
-            }
-          }
-        }
-        var $editCharacterUrl = document.querySelector('#edit-character #image-url');
-        var $editCharacterImg = document.querySelector('#edit-character img');
-        $editCharacterUrl.addEventListener('input', function (event) {
-          $editCharacterImg.setAttribute('src', event.target.value);
-          if ($editCharacterImg.getAttribute('src') === '') {
-            $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
-          }
-        });
-        $backButton = document.querySelector('.back-button');
-        $backButton.addEventListener('click', function (event) {
-          $editCharacter.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-        });
-        $saveCharacterForm = document.querySelector('#edit-character form');
-        $saveCharacterForm.addEventListener('submit', function (event) {
-          event.preventDefault();
-
-          var characterObj = {};
-
-          var characterName = event.target[0].value;
-          var characterUrl = event.target[1].value;
-
-          var raceName = event.target[8].value;
-          var className = event.target[9].value;
-          var abilityScores = {};
-
-          var str = event.target.elements[2].value;
-          var dex = event.target.elements[3].value;
-          var con = event.target.elements[4].value;
-          var int = event.target.elements[5].value;
-          var wis = event.target.elements[6].value;
-          var cha = event.target.elements[7].value;
-          abilityScores.STR = str;
-          abilityScores.DEX = dex;
-          abilityScores.CON = con;
-          abilityScores.INT = int;
-          abilityScores.WIS = wis;
-          abilityScores.CHA = cha;
-
-          var charDescription = event.target[10].value;
-
-          characterObj.character_name = characterName;
-          characterObj.character_img = characterUrl;
-          characterObj.race = raceName;
-          characterObj.class = className;
-          characterObj.ability_scores = abilityScores;
-          characterObj.character_description = charDescription;
-
-          if (data.editing !== null) {
-            characterObj.character_name = characterName;
-            characterObj.character_img = characterUrl;
-            characterObj.EntryId = data.editing.EntryId;
-            characterObj.race = raceName;
-            characterObj.class = className;
-            characterObj.ability_scores = abilityScores;
-            characterObj.character_description = charDescription;
-            for (var i = 0; i < data.entries.length; i++) {
-              if (data.entries[i].EntryId === data.editing.EntryId) {
-                data.entries[i] = characterObj;
-                for (var j = 0; j < $homepagePicWrapper.length; j++) {
-                  if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
-                    $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
-                    $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
-                    $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
-                    $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
-                  }
-                }
-              }
-            }
-            var $updatedEntry = renderEntry(characterObj);
-
-            $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
-
-            data.editing = null;
-          }
-
-          $editCharacter.setAttribute('class', 'hidden');
-          $characterDetails.setAttribute('class', '');
-
-        });
-        $deleteCharacterButton = document.querySelector('.delete-button');
-        $deleteCharacterButton.addEventListener('click', function (event) {
-          $deleteModal.setAttribute('class', 'delete-modal-bg');
-        });
-      });
-    });
-  });
+  homepageClicker();
 });
 
 $cancelButton.addEventListener('click', function (event) {
@@ -811,7 +827,7 @@ $confirmButton.addEventListener('click', function (event) {
     if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.editing.EntryId.toString()) {
       $homepagePicWrapper[j].remove();
       $galleryPicWrapper[j].remove();
-      data.nextEntryId--;
+      // data.nextEntryId--;
     }
   }
 
