@@ -132,8 +132,8 @@ button:hover {
   font-weight: 600;
   text-align: center;
   margin-bottom: 4rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .character-h2:hover {
@@ -146,8 +146,8 @@ button:hover {
   font-weight: 600;
   text-align: center;
   margin-bottom: 0.5rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .character-h2-expanded:hover {
@@ -204,8 +204,8 @@ button:hover {
 }
 
 img {
-  width: 6rem;
-  height: 6rem;
+  width: 5rem;
+  height: 5rem;
   object-fit: cover;
   object-position: 50% 10%;
   border-radius: 50%;
@@ -216,7 +216,7 @@ img {
 }
 
 .pic-section p {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   margin: 0.5rem auto;
 }
 
@@ -234,8 +234,8 @@ img {
 }
 
 .character-content-area img {
-  width: 7rem;
-  height: 7rem;
+  width: 6rem;
+  height: 6rem;
 }
 
 .pic-wrapper img:hover {
@@ -246,7 +246,7 @@ img {
   position: relative;
   color: #d94a37;
   font-size: 2rem;
-  right: 12rem;
+  right: 10rem;
 }
 
 .character-content-area .fa-square-xmark:hover {
@@ -261,7 +261,7 @@ img {
   font-family: "Titillium Web", sans-serif;
   font-weight: 600;
   margin-top: 0;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .race-characteristics h5 {
@@ -300,8 +300,8 @@ img {
   position: absolute;
   font-size: 3.5rem;
   color: #00f946;
-  bottom: 1.5rem;
-  left: 1.3rem;
+  bottom: 1rem;
+  left: 0.75rem;
 }
 
 .fa-circle-check:hover {
