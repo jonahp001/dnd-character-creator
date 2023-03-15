@@ -114,12 +114,12 @@ button:hover {
 }
 
 .character-creation-intro {
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 1rem;
 }
 
 .character-creation-intro > p {
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 400;
   margin: auto 2rem;
   margin-bottom: 1rem;
@@ -216,7 +216,7 @@ img {
 }
 
 .pic-section p {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   margin: 0.5rem auto;
 }
 
@@ -228,7 +228,7 @@ img {
 .pic-section h5 {
   text-align: center;
   font-family: Roboto, sans-serif;
-  font-size: 0.8rem;
+  font-size: 1.25rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
@@ -580,7 +580,7 @@ input::-webkit-inner-spin-button {
   }
 
   #character-form {
-    padding: 0 12rem;
+    padding: 0 7rem;
   }
 
   .pic-wrapper h4 {
@@ -604,6 +604,10 @@ input::-webkit-inner-spin-button {
     height: 8rem;
   }
 
+  .pic-wrapper .modal-bg img {
+    margin: 1rem 0;
+  }
+
   .fa-circle-check {
     bottom: 2.5rem;
     left: 2.3rem;
@@ -614,7 +618,7 @@ input::-webkit-inner-spin-button {
   }
 
   .pic-wrapper .column-full p {
-    padding: 2rem;
+    padding: 0 2rem 1rem;
   }
 
   .character-content > div {
