@@ -3,6 +3,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
   min-height: 100vh;
 }
 
@@ -243,10 +244,10 @@ img {
 }
 
 .character-content-area .fa-square-xmark {
-  position: relative;
+  position: sticky;
   color: #d94a37;
   font-size: 2rem;
-  right: 10rem;
+  right: 100rem;
 }
 
 .character-content-area .fa-square-xmark:hover {
@@ -596,7 +597,8 @@ input::-webkit-inner-spin-button {
   }
 
   .character-content-area .fa-square-xmark {
-    right: 23rem;
+    position: sticky;
+    right: 100rem;
   }
 
   .character-content-area h4 {
