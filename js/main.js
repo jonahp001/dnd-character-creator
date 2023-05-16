@@ -136,6 +136,17 @@ $selectARace.addEventListener('click', function (event) {
     $raceIcons.setAttribute('class', 'pic-section hidden');
   }
 });
+$raceCaret.addEventListener('click', function (event) {
+  if (event.target.getAttribute('class') === 'fa-solid fa-caret-left') {
+    $selectARace.setAttribute('class', 'character-h2-expanded');
+    $raceCaret.setAttribute('class', 'fa-solid fa-caret-down');
+    $raceIcons.setAttribute('class', 'pic-section');
+  } else if (event.target.getAttribute('class') === 'fa-solid fa-caret-down') {
+    $selectARace.setAttribute('class', 'character-h2');
+    $raceCaret.setAttribute('class', 'fa-solid fa-caret-left');
+    $raceIcons.setAttribute('class', 'pic-section hidden');
+  }
+});
 
 $selectAClass.addEventListener('click', function (event) {
   if (event.target.getAttribute('class') === 'character-h2') {
@@ -148,6 +159,17 @@ $selectAClass.addEventListener('click', function (event) {
     $classIcons.setAttribute('class', 'pic-section hidden');
   }
 });
+$classCaret.addEventListener('click', function (event) {
+  if (event.target.getAttribute('class') === 'fa-solid fa-caret-left') {
+    $selectARace.setAttribute('class', 'character-h2-expanded');
+    $raceCaret.setAttribute('class', 'fa-solid fa-caret-down');
+    $raceIcons.setAttribute('class', 'pic-section');
+  } else if (event.target.getAttribute('class') === 'fa-solid fa-caret-down') {
+    $selectARace.setAttribute('class', 'character-h2');
+    $raceCaret.setAttribute('class', 'fa-solid fa-caret-left');
+    $raceIcons.setAttribute('class', 'pic-section hidden');
+  }
+});
 
 $inputAbilityScores.addEventListener('click', function (event) {
   if (event.target.getAttribute('class') === 'character-h2') {
@@ -158,6 +180,17 @@ $inputAbilityScores.addEventListener('click', function (event) {
     $inputAbilityScores.setAttribute('class', 'character-h2');
     $abilityScoreCaret.setAttribute('class', 'fa-solid fa-caret-left');
     $abilityScoreContent.setAttribute('class', 'hidden');
+  }
+});
+$abilityScoreCaret.addEventListener('click', function (event) {
+  if (event.target.getAttribute('class') === 'fa-solid fa-caret-left') {
+    $selectARace.setAttribute('class', 'character-h2-expanded');
+    $raceCaret.setAttribute('class', 'fa-solid fa-caret-down');
+    $raceIcons.setAttribute('class', 'pic-section');
+  } else if (event.target.getAttribute('class') === 'fa-solid fa-caret-down') {
+    $selectARace.setAttribute('class', 'character-h2');
+    $raceCaret.setAttribute('class', 'fa-solid fa-caret-left');
+    $raceIcons.setAttribute('class', 'pic-section hidden');
   }
 });
 
@@ -827,7 +860,6 @@ $confirmButton.addEventListener('click', function (event) {
     if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.editing.EntryId.toString()) {
       $homepagePicWrapper[j].remove();
       $galleryPicWrapper[j].remove();
-      // data.nextEntryId--;
     }
   }
 
