@@ -161,13 +161,13 @@ $selectAClass.addEventListener('click', function (event) {
 });
 $classCaret.addEventListener('click', function (event) {
   if (event.target.getAttribute('class') === 'fa-solid fa-caret-left') {
-    $selectARace.setAttribute('class', 'character-h2-expanded');
-    $raceCaret.setAttribute('class', 'fa-solid fa-caret-down');
-    $raceIcons.setAttribute('class', 'pic-section');
+    $selectAClass.setAttribute('class', 'character-h2-expanded');
+    $classCaret.setAttribute('class', 'fa-solid fa-caret-down');
+    $classIcons.setAttribute('class', 'pic-section');
   } else if (event.target.getAttribute('class') === 'fa-solid fa-caret-down') {
-    $selectARace.setAttribute('class', 'character-h2');
-    $raceCaret.setAttribute('class', 'fa-solid fa-caret-left');
-    $raceIcons.setAttribute('class', 'pic-section hidden');
+    $selectAClass.setAttribute('class', 'character-h2');
+    $classCaret.setAttribute('class', 'fa-solid fa-caret-left');
+    $classIcons.setAttribute('class', 'pic-section hidden');
   }
 });
 
@@ -184,13 +184,13 @@ $inputAbilityScores.addEventListener('click', function (event) {
 });
 $abilityScoreCaret.addEventListener('click', function (event) {
   if (event.target.getAttribute('class') === 'fa-solid fa-caret-left') {
-    $selectARace.setAttribute('class', 'character-h2-expanded');
-    $raceCaret.setAttribute('class', 'fa-solid fa-caret-down');
-    $raceIcons.setAttribute('class', 'pic-section');
+    $inputAbilityScores.setAttribute('class', 'character-h2-expanded');
+    $abilityScoreCaret.setAttribute('class', 'fa-solid fa-caret-down');
+    $abilityScoreContent.setAttribute('class', '');
   } else if (event.target.getAttribute('class') === 'fa-solid fa-caret-down') {
-    $selectARace.setAttribute('class', 'character-h2');
-    $raceCaret.setAttribute('class', 'fa-solid fa-caret-left');
-    $raceIcons.setAttribute('class', 'pic-section hidden');
+    $inputAbilityScores.setAttribute('class', 'character-h2');
+    $abilityScoreCaret.setAttribute('class', 'fa-solid fa-caret-left');
+    $abilityScoreContent.setAttribute('class', 'hidden');
   }
 });
 
