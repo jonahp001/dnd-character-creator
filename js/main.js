@@ -619,6 +619,113 @@ function galleryClicker() {
             $editCharacter.setAttribute('class', 'hidden');
             $characterDetails.setAttribute('class', '');
 
+            for (let i = 0; i < data.entries.length; i++) {
+              if (parseInt($characterDetails.childNodes[1].childNodes[1].attributes[0].value) === data.entries[i].EntryId) {
+                $editCharacterButton = document.querySelector('.edit-button');
+                $editCharacterButton.addEventListener('click', function (event) {
+                  for (var i = 0; i < data.entries.length; i++) {
+                    if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id') && $editCharacter.childNodes[1].childNodes.length < 2) {
+                      $characterDetails.setAttribute('class', 'hidden');
+                      $editCharacter.setAttribute('class', '');
+                      $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
+                      if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                        data.editing = data.entries[i];
+                      }
+                    } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                      $characterDetails.setAttribute('class', 'hidden');
+                      $editCharacter.setAttribute('class', '');
+                      if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                        data.editing = data.entries[i];
+                      }
+                    }
+                  }
+                  var $editCharacterUrl = document.querySelector('#edit-character #image-url');
+                  var $editCharacterImg = document.querySelector('#edit-character img');
+                  $editCharacterUrl.addEventListener('input', function (event) {
+                    $editCharacterImg.setAttribute('src', event.target.value);
+                    if ($editCharacterImg.getAttribute('src') === '') {
+                      $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+                    }
+                  });
+                  $backButton = document.querySelector('.back-button');
+                  $backButton.addEventListener('click', function (event) {
+                    $editCharacter.setAttribute('class', 'hidden');
+                    $characterDetails.setAttribute('class', '');
+                  });
+                  $saveCharacterForm = document.querySelector('#edit-character form');
+                  $saveCharacterForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    var characterObj = {};
+
+                    var characterName = event.target[0].value;
+                    var characterUrl = event.target[1].value;
+
+                    var raceName = event.target[8].value;
+                    var className = event.target[9].value;
+                    var abilityScores = {};
+
+                    var str = event.target.elements[2].value;
+                    var dex = event.target.elements[3].value;
+                    var con = event.target.elements[4].value;
+                    var int = event.target.elements[5].value;
+                    var wis = event.target.elements[6].value;
+                    var cha = event.target.elements[7].value;
+                    abilityScores.STR = str;
+                    abilityScores.DEX = dex;
+                    abilityScores.CON = con;
+                    abilityScores.INT = int;
+                    abilityScores.WIS = wis;
+                    abilityScores.CHA = cha;
+
+                    var charDescription = event.target[10].value;
+
+                    characterObj.character_name = characterName;
+                    characterObj.character_img = characterUrl;
+                    characterObj.race = raceName;
+                    characterObj.class = className;
+                    characterObj.ability_scores = abilityScores;
+                    characterObj.character_description = charDescription;
+
+                    if (data.editing !== null) {
+                      characterObj.character_name = characterName;
+                      characterObj.character_img = characterUrl;
+                      characterObj.EntryId = data.editing.EntryId;
+                      characterObj.race = raceName;
+                      characterObj.class = className;
+                      characterObj.ability_scores = abilityScores;
+                      characterObj.character_description = charDescription;
+                      for (var i = 0; i < data.entries.length; i++) {
+                        if (data.entries[i].EntryId === data.editing.EntryId) {
+                          data.entries[i] = characterObj;
+                          for (var j = 0; j < $homepagePicWrapper.length; j++) {
+                            if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
+                              $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                              $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                              $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                              $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                            }
+                          }
+                        }
+                      }
+                      var $updatedEntry = renderEntry(characterObj);
+
+                      $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
+
+                      data.editing = null;
+                    }
+
+                    $editCharacter.setAttribute('class', 'hidden');
+                    $characterDetails.setAttribute('class', '');
+
+                  });
+                  $deleteCharacterButton = document.querySelector('.delete-button');
+                  $deleteCharacterButton.addEventListener('click', function (event) {
+                    $deleteModal.setAttribute('class', 'delete-modal-bg');
+                  });
+                });
+              }
+            }
           });
           $deleteCharacterButton = document.querySelector('.delete-button');
           $deleteCharacterButton.addEventListener('click', function (event) {
@@ -740,6 +847,114 @@ function homepageClicker() {
 
             $editCharacter.setAttribute('class', 'hidden');
             $characterDetails.setAttribute('class', '');
+
+            for (let i = 0; i < data.entries.length; i++) {
+              if (parseInt($characterDetails.childNodes[1].childNodes[1].attributes[0].value) === data.entries[i].EntryId) {
+                $editCharacterButton = document.querySelector('.edit-button');
+                $editCharacterButton.addEventListener('click', function (event) {
+                  for (var i = 0; i < data.entries.length; i++) {
+                    if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id') && $editCharacter.childNodes[1].childNodes.length < 2) {
+                      $characterDetails.setAttribute('class', 'hidden');
+                      $editCharacter.setAttribute('class', '');
+                      $editCharacterContent.appendChild(renderEntryForEdit(data.entries[i]));
+                      if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                        data.editing = data.entries[i];
+                      }
+                    } else if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                      $characterDetails.setAttribute('class', 'hidden');
+                      $editCharacter.setAttribute('class', '');
+                      if (data.entries[i].EntryId.toString() === event.target.parentNode.getAttribute('data-entry-id')) {
+                        data.editing = data.entries[i];
+                      }
+                    }
+                  }
+                  var $editCharacterUrl = document.querySelector('#edit-character #image-url');
+                  var $editCharacterImg = document.querySelector('#edit-character img');
+                  $editCharacterUrl.addEventListener('input', function (event) {
+                    $editCharacterImg.setAttribute('src', event.target.value);
+                    if ($editCharacterImg.getAttribute('src') === '') {
+                      $editCharacterImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+                    }
+                  });
+                  $backButton = document.querySelector('.back-button');
+                  $backButton.addEventListener('click', function (event) {
+                    $editCharacter.setAttribute('class', 'hidden');
+                    $characterDetails.setAttribute('class', '');
+                  });
+                  $saveCharacterForm = document.querySelector('#edit-character form');
+                  $saveCharacterForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    var characterObj = {};
+
+                    var characterName = event.target[0].value;
+                    var characterUrl = event.target[1].value;
+
+                    var raceName = event.target[8].value;
+                    var className = event.target[9].value;
+                    var abilityScores = {};
+
+                    var str = event.target.elements[2].value;
+                    var dex = event.target.elements[3].value;
+                    var con = event.target.elements[4].value;
+                    var int = event.target.elements[5].value;
+                    var wis = event.target.elements[6].value;
+                    var cha = event.target.elements[7].value;
+                    abilityScores.STR = str;
+                    abilityScores.DEX = dex;
+                    abilityScores.CON = con;
+                    abilityScores.INT = int;
+                    abilityScores.WIS = wis;
+                    abilityScores.CHA = cha;
+
+                    var charDescription = event.target[10].value;
+
+                    characterObj.character_name = characterName;
+                    characterObj.character_img = characterUrl;
+                    characterObj.race = raceName;
+                    characterObj.class = className;
+                    characterObj.ability_scores = abilityScores;
+                    characterObj.character_description = charDescription;
+
+                    if (data.editing !== null) {
+                      characterObj.character_name = characterName;
+                      characterObj.character_img = characterUrl;
+                      characterObj.EntryId = data.editing.EntryId;
+                      characterObj.race = raceName;
+                      characterObj.class = className;
+                      characterObj.ability_scores = abilityScores;
+                      characterObj.character_description = charDescription;
+                      for (var i = 0; i < data.entries.length; i++) {
+                        if (data.entries[i].EntryId === data.editing.EntryId) {
+                          data.entries[i] = characterObj;
+                          for (var j = 0; j < $homepagePicWrapper.length; j++) {
+                            if ($homepagePicWrapper[j].getAttribute('data-entry-id') === data.entries[i].EntryId.toString()) {
+                              $homepagePicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                              $homepagePicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                              $galleryPicWrapper[j].childNodes[0].textContent = data.entries[i].character_name;
+                              $galleryPicWrapper[j].childNodes[1].childNodes[0].src = data.entries[i].character_img;
+                            }
+                          }
+                        }
+                      }
+                      var $updatedEntry = renderEntry(characterObj);
+
+                      $characterDetailContent.childNodes[1].replaceWith($updatedEntry);
+
+                      data.editing = null;
+                    }
+
+                    $editCharacter.setAttribute('class', 'hidden');
+                    $characterDetails.setAttribute('class', '');
+
+                  });
+                  $deleteCharacterButton = document.querySelector('.delete-button');
+                  $deleteCharacterButton.addEventListener('click', function (event) {
+                    $deleteModal.setAttribute('class', 'delete-modal-bg');
+                  });
+                });
+              }
+            }
 
           });
           $deleteCharacterButton = document.querySelector('.delete-button');
